@@ -31,7 +31,17 @@ const DOCUMENTATION_WITHOUT_ACCENTS = "^[^áéíóúÁÉÍÓÚüÜñÑ¿¡]*$";
  * @version 2.0.0
  */
 export default defineConfig([
-  globalIgnores(["dist/**", "coverage/**", "node_modules/**", "*.tsbuildinfo"]),
+  globalIgnores([
+    "dist/**",
+    "coverage/**",
+    "node_modules/**",
+    "*.tsbuildinfo",
+    "src/test/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+  ]),
 
   {
     files: SOURCE_FILES,
