@@ -388,6 +388,6 @@ El acceso al repositorio o la posibilidad de instalar el paquete no implica la
 transferencia de propiedad ni la concesión de derechos de redistribución.
 
 Cualquier permiso de uso debe ser autorizado expresamente por el titular y
-limitarse a las condiciones acordadas.
+limitarse a las condiciones acordadas por siempre.
 
 Copyright © 2026. Todos los derechos reservados.
