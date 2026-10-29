@@ -35,6 +35,7 @@ export default defineConfig([
     "dist/**",
     "coverage/**",
     "node_modules/**",
+    "docs/**",
     "*.tsbuildinfo",
     "src/test/**",
     "**/*.test.ts",

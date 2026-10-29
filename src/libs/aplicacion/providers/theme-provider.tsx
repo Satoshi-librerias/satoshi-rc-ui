@@ -89,65 +89,79 @@ const createThemeContextValue = (
 });
 
 /**
+ * @description Estado interno del ThemeProvider: temas personalizados
+ * registrados y nombre del tema activo. Se combina en un solo estado para
+ * que setTheme vea los temas registrados en el mismo tick (evita la race
+ * condition registerTheme + setTheme).
+ * @author Steveen Cues
+ * @version 1.0.0
+ */
+interface ThemeProviderState {
+  readonly customThemes: readonly CustomThemeDefinition[];
+  readonly themeName: string;
+}
+
+/**
  * @description Proporciona los temas base y personalizados a los componentes.
  * Gestiona la seleccion, el registro y la persistencia del tema activo.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 2.0.0
  */
 export const ThemeProvider: FC<ThemeProviderProps> = ({
   themes: baseThemes,
   initialTheme,
   children,
 }) => {
-  const [customThemes, setCustomThemes] = useState<
-    readonly CustomThemeDefinition[]
-  >([]);
+  const [state, setState] = useState<ThemeProviderState>(() => ({
+    customThemes: [],
+    themeName: resolveInitialTheme(baseThemes, initialTheme),
+  }));
 
   const themes = useMemo<readonly AppTheme[]>(
-    () => [...baseThemes, ...customThemes],
-    [baseThemes, customThemes],
-  );
-
-  const [themeName, setThemeName] = useState<string>(() =>
-    resolveInitialTheme(baseThemes, initialTheme),
+    () => [...baseThemes, ...state.customThemes],
+    [baseThemes, state.customThemes],
   );
 
   const theme = useMemo<AppTheme>(
-    () => resolveActiveTheme(themes, themeName),
-    [themes, themeName],
+    () => resolveActiveTheme(themes, state.themeName),
+    [themes, state.themeName],
   );
 
   const registerTheme = useCallback(
     (customTheme: CustomThemeDefinition): void => {
       customThemeService.register(customTheme);
-      setCustomThemes((currentThemes) =>
-        updateCustomThemes(currentThemes, customTheme),
-      );
+      setState((current) => ({
+        ...current,
+        customThemes: updateCustomThemes(current.customThemes, customTheme),
+      }));
     },
     [],
   );
 
   const setTheme = useCallback(
     (name: string): void => {
-      const selectedTheme = findThemeByName(themes, name);
+      setState((current) => {
+        const availableThemes = [...baseThemes, ...current.customThemes];
+        const selectedTheme = findThemeByName(availableThemes, name);
 
-      if (selectedTheme === undefined) {
-        return;
-      }
+        if (selectedTheme === undefined) {
+          return current;
+        }
 
-      if (isCustomThemeDefinition(selectedTheme)) {
-        customThemeService.register(selectedTheme);
-      }
-
-      setThemeName(selectedTheme.name);
+        return { ...current, themeName: selectedTheme.name };
+      });
     },
-    [themes],
+    [baseThemes],
   );
 
   useEffect((): void => {
+    if (isCustomThemeDefinition(theme)) {
+      customThemeService.register(theme);
+    }
+
     applyThemeToDocument(theme.name);
     persistTheme(theme.name);
-  }, [theme.name]);
+  }, [theme]);
 
   const contextValue = useMemo(
     () => createThemeContextValue(theme, themes, setTheme, registerTheme),
