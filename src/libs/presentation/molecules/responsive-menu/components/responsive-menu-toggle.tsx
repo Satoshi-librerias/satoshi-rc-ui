@@ -1,5 +1,6 @@
 import type { FC, JSX } from "react";
 import type { ResponsiveMenuToggleProps } from "../types/responsive-menu.types";
+import { RESPONSIVE_MENU_PANEL_ID_PREFIX } from "../constants/responsive-menu.constants";
 
 /**
  * @description Boton que alterna la visibilidad del menu movil con
@@ -12,12 +13,13 @@ export const ResponsiveMenuToggle: FC<ResponsiveMenuToggleProps> = ({
   openLabel,
   closeLabel,
   onToggle,
+  panelId = RESPONSIVE_MENU_PANEL_ID_PREFIX,
 }): JSX.Element => {
   const label = isOpen ? closeLabel : openLabel;
 
   return (
     <button
-      aria-controls="responsive-menu-panel"
+      aria-controls={panelId}
       aria-expanded={isOpen}
       aria-label={label}
       className="btn btn-ghost btn-sm md:hidden"

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Navigation, ResponsiveMenu } from "@presentation";
 
@@ -48,23 +49,30 @@ export const PorDefecto: Story = {
 };
 
 /**
- * @description Menu con toggle personalizado controlado por el consumidor.
+ * @description Menu con toggle personalizado controlado por el consumidor
+ * mediante las propiedades isOpen y onToggle.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const ConTogglePersonalizado: Story = {
-  render: () => (
-    <ResponsiveMenu
-      toggle={
-        <button className="btn btn-primary btn-sm" type="button">
-          Abrir menu
-        </button>
-      }
-      className="rounded-xl border border-base-300 p-3"
-    >
-      <Navigation items={NAVIGATION_ITEMS} orientation="vertical" />
-    </ResponsiveMenu>
-  ),
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+      <ResponsiveMenu
+        isOpen={isOpen}
+        onToggle={(): void => setIsOpen((open) => !open)}
+        toggle={
+          <button className="btn btn-primary btn-sm" type="button">
+            Abrir menu
+          </button>
+        }
+        className="rounded-xl border border-base-300 p-3"
+      >
+        <Navigation items={NAVIGATION_ITEMS} orientation="vertical" />
+      </ResponsiveMenu>
+    );
+  },
 };
 
 /**

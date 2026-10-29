@@ -66,7 +66,13 @@ export const HeaderComposition: FC<HeaderCompositionProps> = ({
     <header
       className={`border-b border-base-300 bg-base-100 ${className}`.trim()}
     >
-      <Container maxWidth="xl" align="between" padding="md" gap="sm">
+      <Container
+        maxWidth="xl"
+        align="between"
+        padding="md"
+        gap="sm"
+        className="flex-wrap"
+      >
         {children}
       </Container>
     </header>
