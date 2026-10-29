@@ -8,6 +8,7 @@ export interface ResponsiveMenuToggleProps {
   readonly openLabel: string;
   readonly closeLabel: string;
   readonly onToggle: () => void;
+  readonly panelId?: string;
 }
 
 /**
@@ -31,6 +32,8 @@ export interface ResponsiveMenuProps {
   readonly children: React.ReactNode;
   readonly labels?: ResponsiveMenuLabels;
   readonly className?: string;
+  readonly isOpen?: boolean;
+  readonly onToggle?: () => void;
 }
 
 /**
