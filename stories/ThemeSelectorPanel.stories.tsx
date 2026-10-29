@@ -1,6 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Decorator, Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import { ThemeSelectorPanel } from "@presentation";
+import {
+  ThemeSelectorPanel,
+  type ThemeSelectorPanelProps,
+} from "@presentation";
 import { STORY_THEMES } from "./fixtures";
 
 /**
@@ -31,6 +34,52 @@ const PANEL_PLACEMENT = {
 } as const;
 
 /**
+ * @description Separacion entre el activador y el panel, igual al gap
+ * que aplica el panel con mt-2/mb-2.
+ * @author Steveen Cues
+ * @version 1.1.0
+ */
+const PANEL_GAP_PX = 8;
+
+/**
+ * @description Reserva el espacio que ocupa el panel desplegable: al ser
+ * position absolute no contribuye a la altura del contenedor de docs y
+ * quedaria clipeado. El ancla es el offset parent del panel y el spacer
+ * replica su altura visible segun la direccion de apertura.
+ * @author Steveen Cues
+ * @version 1.1.0
+ */
+const withPanelSpace: Decorator<ThemeSelectorPanelProps> = (Story, context) => {
+  const placement = context.args.placement;
+  const openUpwards = placement.vertical === "top";
+  const panelHeight = Math.min(placement.maxHeight, 448) + PANEL_GAP_PX;
+
+  return (
+    <div
+      className={`relative flex w-80 flex-col ${
+        openUpwards ? "justify-end" : "justify-start"
+      }`}
+    >
+      {openUpwards ? (
+        <div aria-hidden="true" style={{ height: panelHeight }} />
+      ) : null}
+      <div className="relative">
+        <button
+          type="button"
+          className="btn btn-sm rounded-full border border-base-300 bg-base-100 px-4 text-base-content"
+        >
+          Temas
+        </button>
+        <Story />
+      </div>
+      {openUpwards ? null : (
+        <div aria-hidden="true" style={{ height: panelHeight }} />
+      )}
+    </div>
+  );
+};
+
+/**
  * @description Stories del panel desplegable del selector de temas.
  * @author Steveen Cues
  * @version 1.1.0
@@ -42,6 +91,7 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  decorators: [withPanelSpace],
   args: {
     onSearchChange: fn(),
     onSelectTheme: fn(),
