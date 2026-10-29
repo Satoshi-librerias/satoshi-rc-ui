@@ -35,11 +35,11 @@ const ToggleInteractivo: FC = (): JSX.Element => {
 const meta = {
   title: "Moleculas/ResponsiveMenuToggle",
   component: ResponsiveMenuToggle,
+  globals: {
+    viewport: "mobile1",
+  },
   parameters: {
     layout: "centered",
-    viewport: {
-      defaultViewport: "mobile1",
-    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof ResponsiveMenuToggle>;

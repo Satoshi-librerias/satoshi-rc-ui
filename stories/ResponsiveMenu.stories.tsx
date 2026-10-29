@@ -21,6 +21,9 @@ const NAVIGATION_ITEMS = [
 const meta = {
   title: "Moleculas/ResponsiveMenu",
   component: ResponsiveMenu,
+  globals: {
+    viewport: "mobile1",
+  },
   parameters: {
     layout: "padded",
   },
