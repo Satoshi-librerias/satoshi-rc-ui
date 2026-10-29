@@ -30,15 +30,15 @@ export const HeaderSelectors: FC<
   additionalActions,
 }): JSX.Element => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {showThemeSelector && (
-        <div className="w-40 sm:w-48">
+        <div className="w-40 sm:w-48 min-w-0">
           <ThemeSelector />
         </div>
       )}
 
       {showLanguageSelector && (
-        <div className="w-36 sm:w-40">
+        <div className="w-36 sm:w-40 min-w-0">
           <LanguageSelector />
         </div>
       )}

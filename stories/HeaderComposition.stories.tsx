@@ -57,11 +57,11 @@ export const Completo: Story = {
         />
         <Navigation items={NAVIGATION_ITEMS} />
       </HeaderBrand>
-      <HeaderActions>
-        <div className="w-40 sm:w-48">
+      <HeaderActions className="flex-wrap">
+        <div className="w-40 sm:w-48 min-w-0">
           <ThemeSelector />
         </div>
-        <div className="w-36 sm:w-40">
+        <div className="w-36 sm:w-40 min-w-0">
           <LanguageSelector />
         </div>
       </HeaderActions>

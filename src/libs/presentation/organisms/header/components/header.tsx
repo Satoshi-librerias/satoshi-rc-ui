@@ -109,7 +109,13 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
     <header
       className={`border-b border-base-300 bg-base-100 ${config.className}`.trim()}
     >
-      <Container maxWidth="xl" align="between" padding="md" gap="sm">
+      <Container
+        maxWidth="xl"
+        align="between"
+        padding="md"
+        gap="sm"
+        className="flex-wrap"
+      >
         <div className="flex items-center gap-2">
           {brand}
 
@@ -123,6 +129,7 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
           isOpen={isOpen}
           onToggle={toggleMenu}
           openLabel={labels.open}
+          panelId={panelId}
         />
       </Container>
 
