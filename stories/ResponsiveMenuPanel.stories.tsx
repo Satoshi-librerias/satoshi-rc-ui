@@ -22,11 +22,11 @@ const NAVIGATION_ITEMS = [
 const meta = {
   title: "Moleculas/ResponsiveMenuPanel",
   component: ResponsiveMenuPanel,
+  globals: {
+    viewport: "mobile1",
+  },
   parameters: {
     layout: "padded",
-    viewport: {
-      defaultViewport: "mobile1",
-    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof ResponsiveMenuPanel>;
