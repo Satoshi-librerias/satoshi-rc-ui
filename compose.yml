@@ -1,0 +1,8 @@
+services:
+  storybook:
+    build: .
+    image: satoshi-storybook:latest
+    container_name: satoshi-storybook
+    ports:
+      - "8080:80"
+    restart: unless-stopped
