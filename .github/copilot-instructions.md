@@ -3,18 +3,16 @@
 ## Proposito de estas instrucciones
 
 Reglas universales de trabajo y quirks del entorno. Lo especifico del proyecto
-(stack, comandos, puertos, convenciones de codigo) se documenta en el repo:
-preferiblemente en su `AGENTS.md` (u otro rulebook equivalente si el repo no lo
-usa) y en la documentacion propia; si algo de eso falta aqui, se anade alli, no
-en este archivo.
+(stack, comandos, convenciones de codigo) va en el repo, preferiblemente en su
+`AGENTS.md` u otro rulebook equivalente; si algo falta, se anade alli, no aqui.
 
 ## Documentacion de operaciones
 
-Usa la skill `ops-lifecycle` para crear, verificar o actualizar los documentos
-de `.ops/`: define plantillas, estados y trazabilidad. Si el repo no tiene
-`.ops/`, ejecuta su bootstrap antes de la primera tarea de desarrollo: `.ops` es
-donde se registra lo encontrado por cada rol en cada sesion agentica; sin `.ops`
-no queda documentado nada. Este archivo no repite sus reglas.
+Usa la skill `ops-lifecycle` para crear o actualizar los documentos de `.ops/`:
+define plantillas, estados y trazabilidad. Si el repo no tiene `.ops/`, ejecuta
+su bootstrap antes de la primera tarea de desarrollo: `.ops` es donde se
+registra lo encontrado por cada rol en cada sesion agentica; sin `.ops` no queda
+documentado nada. Este archivo no repite sus reglas.
 
 ## Idioma
 
@@ -28,13 +26,12 @@ no queda documentado nada. Este archivo no repite sus reglas.
   del producto y el contenido dirigido a usuarios finales siguen la convencion
   del proyecto.
 - Documentacion general en Markdown sigue la convencion del repo si existe; por
-  defecto, sin diacriticos para mantener diffs y buscadores estables.
+  defecto, sin diacriticos (diffs y buscadores estables).
 
 ## Gotchas del entorno (aplican siempre)
 
-- **Shell:** bash preferente. En Windows usa Git Bash; si no esta disponible,
-  baja a PowerShell. En Linux/Mac, el shell del sistema. La sintaxis POSIX
-  (`&&`, `||`, pipes, comillas simples) funciona igual en los tres.
+- **Shell:** bash preferente. En Windows usa Git Bash (o PowerShell); en
+  Linux/Mac el del sistema. La sintaxis POSIX funciona igual en los tres.
 - **CRLF/LF:** al crear scripts, respeta los finales de linea que ya usa el
   repo; no mezcles.
 - **curl:** con Git Bash es el curl de siempre: JSON entre comillas simples, o
@@ -61,13 +58,12 @@ medias sin dejar rastro escrito. **Al abrir sesion en un repo con `.ops` (o
 1. Lee antes de escribir: entiende la zona afectada antes de proponer cambios.
 2. Cambios minimos y completos: nada de refactorizaciones colaterales ni TODOs
    pendientes.
-3. Valida siempre: compila, prueba o ejecuta el camino minimo que cubre tu
-   cambio.
+3. Valida siempre: compila, prueba o ejecuta el camino minimo de tu cambio.
 4. Si algo no funciona, prueba una alternativa antes de declararlo imposible.
 
 ## Commits
 
-- Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`,
+- Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:` o
   `test:`.
 - Un commit = un cambio coherente; sin artefactos generados ni secretos.
 - Mensajes en ASCII sin diacriticos (regla de idioma de arriba).
