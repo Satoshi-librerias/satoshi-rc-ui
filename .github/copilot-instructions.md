@@ -27,9 +27,8 @@ no queda documentado nada. Este archivo no repite sus reglas.
   (ordenan mal, rompen diffs y generan mojibake en terminales Windows). La UI
   del producto y el contenido dirigido a usuarios finales siguen la convencion
   del proyecto.
-- Documentacion general en Markdown (README, guias) sigue la convencion del repo
-  si existe; por defecto aplica la misma regla sin diacriticos para mantener
-  diffs y buscadores estables.
+- Documentacion general en Markdown sigue la convencion del repo si existe; por
+  defecto, sin diacriticos para mantener diffs y buscadores estables.
 
 ## Gotchas del entorno (aplican siempre)
 
