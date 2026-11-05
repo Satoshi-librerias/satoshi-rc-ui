@@ -23,8 +23,8 @@ personalizable y mantenible para aplicaciones React.
 
 Antes de comenzar, asegúrate de tener instalado:
 
-- Node.js 20 o superior, compatible con la configuración del proyecto.
-- npm.
+- Node.js 22 o superior (el CI usa Node 24).
+- npm 11 o superior.
 - Git.
 
 ## 🚀 Instalación
@@ -42,11 +42,11 @@ El archivo `.tgz` generado se almacena en el directorio `resources/`.
 Instálalo en otra aplicación React:
 
 ```bash
-npm install ../ruta-de-la-libreria/resources/react-ui-0.0.0.tgz
+npm install ../ruta-de-la-libreria/resources/satoshi-rc-ui-1.0.0.tgz
 ```
 
-Reemplaza la ruta y el nombre del archivo por los valores reales generados por
-el proyecto.
+Reemplaza la ruta y el número de versión por los valores reales generados por el
+proyecto.
 
 ### Instalar desde un registro privado de npm
 
@@ -61,7 +61,7 @@ archivo `.npmrc` del proyecto consumidor:
 Instala la librería:
 
 ```bash
-npm install @tu-organizacion/react-ui
+npm install @satoshi-librerias/satoshi-rc-ui
 ```
 
 Reemplaza el nombre de la organización y el paquete por los valores definidos en
@@ -78,43 +78,170 @@ Clona el repositorio e instala las dependencias:
 
 ```bash
 git clone <url-del-repositorio>
-cd starter-react-ui
+cd satoshi-rc-ui
 npm install
 ```
 
-Inicia el servidor de desarrollo:
+Compila la librería:
 
 ```bash
-npm run dev
+npm run build:lib
 ```
 
-Genera la compilación:
+Compila y empaqueta la librería con validaciones completas:
 
 ```bash
 npm run build
 ```
 
-Previsualiza la compilación de producción, si el proyecto lo permite:
+Explora los componentes en Storybook:
 
 ```bash
-npm run preview
+npm run storybook
 ```
+
+Para desarrollo en tiempo real con un proyecto consumidor, consulta la seccion
+[Desarrollo en tiempo real](#⚡-desarrollo-en-tiempo-real-con-un-proyecto-consumidor).
 
 ## 📦 Scripts disponibles
 
-| Comando                | Descripción                                                      |
-| ---------------------- | ---------------------------------------------------------------- |
-| `npm run dev`          | Inicia el servidor de desarrollo de Vite.                        |
-| `npm run build`        | Compila la aplicación o librería según la configuración de Vite. |
-| `npm run preview`      | Previsualiza la compilación de producción.                       |
-| `npm run lint`         | Ejecuta ESLint para validar el código.                           |
-| `npm run format`       | Formatea los archivos con Prettier.                              |
-| `npm run format:check` | Comprueba el formato sin modificar archivos.                     |
-| `npm run package:lib`  | Ejecuta el proceso de empaquetado de la librería.                |
-| `npm run prepare`      | Inicializa los Git Hooks configurados.                           |
+| Comando                 | Descripción                                                       |
+| ----------------------- | ----------------------------------------------------------------- |
+| `npm run storybook`     | Inicia Storybook para explorar los componentes.                   |
+| `npm run dev:lib`       | Compila la librería en modo watch para desarrollo con `npm link`. |
+| `npm run link:consumer` | Registra la librería globalmente (`npm link`) para desarrollo.    |
+| `npm run build`         | Compila la aplicación o librería según la configuración de Vite.  |
+| `npm run lint`          | Ejecuta ESLint para validar el código.                            |
+| `npm run format`        | Formatea los archivos con Prettier.                               |
+| `npm run format:check`  | Comprueba el formato sin modificar archivos.                      |
+| `npm run package:lib`   | Ejecuta el proceso de empaquetado de la librería.                 |
+| `npm run prepare`       | Inicializa los Git Hooks configurados.                            |
 
 Los comandos disponibles dependen de los scripts definidos en `package.json`.
 Ajusta esta tabla según la configuración real del proyecto.
+
+En el proyecto consumidor (`starter-scaffolding-react-web`) están disponibles:
+
+| Comando                        | Descripción                                              |
+| ------------------------------ | -------------------------------------------------------- |
+| `npm run ui:link:dev`          | Enlaza la librería local vía `npm link` para desarrollo. |
+| `npm run ui:unlink:dev`        | Deshace el enlace y reinstala desde el `.tgz` local.     |
+| `npm run ui:install:local`     | Instala la librería desde el `.tgz` de `resource/`.      |
+| `npm run ui:install:published` | Instala la última versión publicada en el registro.      |
+
+## ⚡ Desarrollo en tiempo real con un proyecto consumidor
+
+Para ver los cambios de la librería reflejados al instante en un proyecto que la
+consume (por ejemplo, una aplicación Vite + React), usa `npm link` junto con el
+modo watch. No hace falta generar el `.tgz` ni reinstalar en cada cambio.
+
+### 1. Enlazar la librería
+
+En el repositorio de la librería:
+
+```bash
+npm run build:lib        # genera dist/ una sola vez
+npm run link:consumer    # crea el enlace global (npm link)
+```
+
+En el proyecto consumidor:
+
+```bash
+npm run ui:link:dev      # enlaza la libreria (npm link satoshi-rc-ui)
+```
+
+Con esto, `node_modules/satoshi-rc-ui` apunta al repositorio de la librería.
+
+### 2. Configurar Vite en el proyecto consumidor
+
+Añade al `vite.config.ts` del proyecto consumidor:
+
+```ts
+export default defineConfig({
+  // ...
+  resolve: {
+    dedupe: ["react", "react-dom"],
+  },
+  server: {
+    fs: {
+      allow: [".."],
+    },
+  },
+});
+```
+
+- `server.fs.allow` permite a Vite servir los archivos del repositorio enlazado,
+  que están fuera de la raíz del proyecto.
+- `resolve.dedupe` garantiza una sola copia de React y evita el error "Invalid
+  hook call" por duplicidad.
+
+### 3. Compilar en modo watch
+
+Deja corriendo en una terminal, dentro de la librería:
+
+```bash
+npm run dev:lib
+```
+
+Y en otra terminal, el servidor del proyecto consumidor:
+
+```bash
+npm run dev
+```
+
+Cada cambio en `src/` de la librería regenera `dist/` (JavaScript ESM y CJS,
+declaraciones `.d.ts` y `style.css`) en unos segundos; al recargar el navegador
+del consumidor se ven los cambios. Los cambios de tipos pueden requerir
+reiniciar el TS server del editor.
+
+### 4. Volver al modo producción
+
+```bash
+cd <proyecto-consumidor>
+npm run ui:unlink:dev
+```
+
+Este comando deshace el enlace y reinstala la librería desde el `.tgz` local
+(`resource/satoshi-rc-ui-<version>.tgz`, carpeta `resource/` del proyecto
+consumidor).
+
+## 🎨 Storybook con Docker
+
+Storybook se puede desplegar como sitio estático en un contenedor, sin necesidad
+de Node instalado en la máquina destino.
+
+### Requisitos
+
+- Docker con el plugin Compose.
+
+### Desplegar
+
+```bash
+docker compose up -d --build
+```
+
+Storybook queda disponible en `http://localhost:8080`.
+
+### Comandos útiles
+
+| Comando                        | Descripción                          |
+| ------------------------------ | ------------------------------------ |
+| `docker compose up -d --build` | Reconstruye y levanta el contenedor. |
+| `docker compose down`          | Detiene y elimina el contenedor.     |
+| `docker compose logs -f`       | Muestra los logs del contenedor.     |
+
+La imagen se construye en dos etapas: Node compila `npm run build:storybook` y
+nginx sirve la salida estática de `docs/storybook` en el puerto 80.
+
+### Desplegar en un servidor
+
+Copia el contexto del repositorio al servidor y ejecuta
+`docker compose up -d --build`, o publica la imagen en un registro:
+
+```bash
+docker tag satoshi-storybook:latest <registro>/<usuario>/satoshi-storybook:latest
+docker push <registro>/<usuario>/satoshi-storybook:latest
+```
 
 ## 🎨 Gestión de temas
 
@@ -260,17 +387,15 @@ ci(actions): agregar flujo de despliegue
 
 ### Git Hooks automatizados
 
-Cuando los hooks locales están configurados, antes de crear un commit se
-ejecutan:
+Cuando los hooks locales están configurados (Husky, se inicializan con
+`npm install` vía el script `prepare`), se ejecutan:
 
-1. **ESLint:** valida la calidad del código.
-2. **Commitlint:** verifica que el mensaje cumpla con Conventional Commits.
+1. **pre-commit:** ESLint + comprobación de formato con Prettier + formateo.
+2. **commit-msg:** Commitlint verifica que el mensaje cumpla con Conventional
+   Commits.
+3. **pre-push:** ESLint.
 
-Si falla ESLint o el mensaje no cumple la convención, Git rechaza el commit.
-
-Si los hooks se generan localmente y están excluidos del control de versiones,
-el repositorio debe incluir el script de configuración y ejecutarlo
-automáticamente durante la instalación de dependencias.
+Si falla ESLint o el mensaje no cumple la convención, Git rechaza la operación.
 
 ## 📦 Empaquetado de la librería
 
@@ -300,20 +425,24 @@ librería.
 
 ### Validación de código y formato
 
-Se ejecuta en los pushes y pull requests dirigidos a las ramas configuradas.
-
-Las validaciones pueden incluir:
+El workflow de CI (`deploy.yml`) se ejecuta en los pushes y pull requests
+dirigidos a `main` y `develop`. Las validaciones incluyen:
 
 - Instalación de dependencias.
-- Ejecución de ESLint.
 - Comprobación del formato con Prettier.
+- Ejecución de ESLint.
+- Ejecución de pruebas unitarias con Vitest.
+- Compilación de la librería.
+
+Otros workflows: `unit-tests.yml` (pruebas), `lint.yml` (lint y formato),
+`commitlint.yml` (mensajes de commit), `security.yml` (auditoría de
+dependencias) y `validate-kit.yml` (validación del kit de personalización).
 
 ### Despliegue del paquete
 
-El workflow de despliegue genera el paquete `.tgz` y lo publica como artefacto
-descargable de la ejecución correspondiente de GitHub Actions.
-
-Puedes descargarlo desde la sección **Actions** del repositorio.
+Actualmente el CI valida pero no publica ni adjunta artefactos. Para obtener el
+paquete instalable, genera el `.tgz` localmente con `npm run package:lib` o
+añade un paso de publicación al workflow cuando se necesite.
 
 > Subir un artefacto a GitHub Actions no equivale a publicar la librería en npm
 > o GitHub Packages.
@@ -331,34 +460,33 @@ Para distribuir la librería de forma privada:
 
 ## 📁 Estructura del proyecto
 
-La estructura puede organizarse de la siguiente manera:
-
 ```text
-starter-react-ui/
+satoshi-rc-ui/
 ├── .github/
-│   └── workflows/
+│   ├── tools/              # validador del kit de personalizacion
+│   ├── skills/             # skill ops-lifecycle
+│   └── workflows/          # flujos de CI
 ├── scripts/
-│   ├── package-library.mjs
+│   └── package-library.mjs # empaquetado de la libreria
 ├── src/
-│ │──libs/
-│    ├── components/
-│    ├── domain/
-│    ├── application/
-│    ├── infrastructure/
-│    ├── presentation/
-│    └── index.ts
-├── resources/
-├── .gitignore
+│   ├── assets/             # recursos estaticos
+│   ├── libs/
+│   │   ├── aplicacion/     # contexts, hooks, providers, services, utils
+│   │   ├── domain/         # constants, enums, interface, types
+│   │   ├── infraestructura/# storage
+│   │   ├── presentation/   # atoms, molecules, organisms
+│   │   ├── styles/
+│   │   └── index.ts
+│   ├── test/               # setup y utilidades de prueba
+│   └── index.ts            # punto de entrada
+├── stories/                # historias de Storybook
+├── resources/              # paquetes .tgz generados
 ├── commitlint.config.cjs
 ├── eslint.config.js
-├── package.json
-├── tsconfig.json
 ├── vite.config.ts
-└── README.md
+├── vitest.config.ts
+└── package.json
 ```
-
-La estructura definitiva dependerá de la arquitectura implementada en el
-repositorio.
 
 ## 🤝 Guía de contribución
 

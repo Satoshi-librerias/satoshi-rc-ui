@@ -28,8 +28,10 @@
     "build:lib": "tsc -b && vite build",
     "package:lib": "npm run format && npm run lint && node scripts/package-library.mjs",
     "build": "npm run lint && npm run format:check && npm run build:lib && npm run package:lib",
+    "dev:lib": "vite build --watch",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build -o docs/storybook",
+    "link:consumer": "npm link",
     "prepare": "husky"
   },
   "devDependencies": {

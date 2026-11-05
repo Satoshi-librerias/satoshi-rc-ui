@@ -1,0 +1,8 @@
+node_modules
+dist
+docs/storybook
+resources
+coverage
+.git
+.copilot
+*.log
