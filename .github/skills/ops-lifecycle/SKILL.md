@@ -1,13 +1,6 @@
 ---
 name: ops-lifecycle
-description:
-  Govern any software project through a full ops lifecycle. Use when planning
-  phases or epics, writing requirements, business logic, phase or task
-  specifications, test strategy, bug reports, ADRs, risk registers, migrations,
-  runbooks, security findings, releases, guides, when preparing session handoff
-  and progress notes, when development starts in a repo without .ops (run the
-  bootstrap first), or for any request mentioning .ops, OKF, REQ, BL, IMPL, QT,
-  BUG, DEC, RSK, RUN, MIG, REL, VULN, PROGRESS.md or handoff.
+description: Ops lifecycle governance: plans, specs, ADRs, releases, handoff.
 ---
 
 # ops-lifecycle
