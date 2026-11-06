@@ -45,6 +45,20 @@ numeracion puede reordenarse y la cita quedaria rota.
    `../` hacia otro arbol). Nunca enlaces absolutos tipo `C:\...` ni rutas con
    nombre de usuario.
 
+## Convenciones de codigo y documentacion del proyecto
+
+Al documentar implementaciones en `.ops` o crear codigo en repos que adoptan el
+kit, aplica las convenciones del rulebook del proyecto. Las comunes del kit:
+
+- Componentes y estilos: Tailwind CSS responsive (breakpoints `sm:`, `md:`,
+  `lg:`), respetando la estructura de capas del proyecto (presentation/
+  aplicacion/domain/infraestructura).
+- Toda pieza nueva o modificada exige pruebas unitarias; registra su resultado
+  como evidencia en los documentos de `.ops`.
+- La documentacion de codigo se genera con JSDoc (`@description`, `@param`,
+  `@returns`, `@version`, `@author`) y sin caracteres especiales (acentos, enes,
+  signos de apertura); los linters del proyecto lo validan.
+
 ## Trazabilidad y numeracion
 
 - Cadena: REQ -> BL -> IMPL -> QT; cada QT se mapea a los IMPL/BL/REQ que
