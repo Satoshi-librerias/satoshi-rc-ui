@@ -177,19 +177,28 @@ jobs:
                   ? `${pagesUrl}preview/`
                   : null;
 
-            const isDeployableBranch =
-              deployLink !== null &&
-              (commitlintResult === "success" &&
-                lintResult === "success" &&
-                securityResult === "success");
+            const pagesWorkflowId =
+              baseRef === "main" ? "pages-main.yml" : "pages-develop.yml";
+
+            const pagesRuns = await github.paginate(
+              github.rest.actions.listWorkflowRuns,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: pagesWorkflowId,
+                branch: baseRef,
+                per_page: 1,
+              },
+            );
+            const deployResult = pagesRuns[0]?.conclusion ?? "pending";
 
             const deploySection = deployLink
               ? [
                   "",
                   "## 🚀 Despliegue (Storybook)",
-                  isDeployableBranch
+                  deployResult === "success"
                     ? `Se desplego correctamente la rama base \`${baseRef}\`: [${deployLink}](${deployLink})`
-                    : `Despliegue pendiente de la rama base \`${baseRef}\` (requiere CI en verde): [${deployLink}](${deployLink})`,
+                    : `Despliegue \`${deployResult}\` de la rama base \`${baseRef}\`: [${deployLink}](${deployLink})`,
                 ].join("\n")
               : "";
 
