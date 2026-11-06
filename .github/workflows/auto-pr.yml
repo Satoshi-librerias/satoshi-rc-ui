@@ -15,6 +15,10 @@ jobs:
   ci:
     name: CI Validation
     runs-on: ubuntu-latest
+    outputs:
+      commitlint: ${{ steps.ci-results.outputs.commitlint }}
+      lint: ${{ steps.ci-results.outputs.lint }}
+      security_audit: ${{ steps.ci-results.outputs.security_audit }}
 
     steps:
       - name: Checkout repository
@@ -26,7 +30,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          package-manager-cache: false
 
       - name: Update npm
         run: npm install --global npm@11.19.1
@@ -40,19 +43,37 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Commitlint
+        id: commitlint
         run:
           npx --no-install commitlint --from="origin/${{ github.base_ref }}"
           --to=HEAD
 
       - name: Lint
+        id: lint
         run: npm run lint
 
       - name: Security audit
+        id: security-audit
         run: npm audit --audit-level=high
+
+      - name: Export CI step results
+        id: ci-results
+        if: always()
+        env:
+          COMMITLINT_RESULT: ${{ steps.commitlint.outcome }}
+          LINT_RESULT: ${{ steps.lint.outcome }}
+          SECURITY_AUDIT_RESULT: ${{ steps.security-audit.outcome }}
+        run: |
+          {
+            echo "commitlint=${COMMITLINT_RESULT:-skipped}"
+            echo "lint=${LINT_RESULT:-skipped}"
+            echo "security_audit=${SECURITY_AUDIT_RESULT:-skipped}"
+          } >> "$GITHUB_OUTPUT"
 
   update-pr:
     name: Update Pull Request
     needs: ci
+    if: always()
     runs-on: ubuntu-latest
 
     steps:
@@ -104,6 +125,9 @@ jobs:
           FILES: ${{ steps.metadata.outputs.files }}
           FIRST_COMMIT: ${{ steps.metadata.outputs.first_commit }}
           TYPES: ${{ steps.metadata.outputs.types }}
+          COMMITLINT_RESULT: ${{ needs.ci.outputs.commitlint }}
+          LINT_RESULT: ${{ needs.ci.outputs.lint }}
+          SECURITY_AUDIT_RESULT: ${{ needs.ci.outputs.security_audit }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -117,6 +141,66 @@ jobs:
             const files = process.env.FILES || "- Sin cambios";
             const firstCommit = process.env.FIRST_COMMIT || pr.head.ref;
             const types = process.env.TYPES || "chore";
+            const baseRef = pr.base.ref;
+
+            const checkmark = (result) =>
+              result === "success" ? "x" : " ";
+
+            const commitlintResult = process.env.COMMITLINT_RESULT || "skipped";
+            const lintResult = process.env.LINT_RESULT || "skipped";
+            const securityResult = process.env.SECURITY_AUDIT_RESULT || "skipped";
+
+            const unitTestRuns = await github.paginate(
+              github.rest.actions.listWorkflowRuns,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: "unit-tests.yml",
+                head_sha: pr.head.sha,
+                per_page: 1,
+              },
+            );
+            const testResult = unitTestRuns[0]?.conclusion ?? "pending";
+
+            const checklist = [
+              `- [${checkmark(commitlintResult)}] Commitlint (\`${commitlintResult}\`)`,
+              `- [${checkmark(lintResult)}] Lint (\`${lintResult}\`)`,
+              `- [${checkmark(testResult)}] Tests (\`${testResult}\`)`,
+              `- [${checkmark(securityResult)}] Security audit (\`${securityResult}\`)`,
+            ].join("\n");
+
+            const pagesUrl = "https://satoshi-librerias.github.io/satoshi-rc-ui/";
+            const deployLink =
+              baseRef === "main"
+                ? pagesUrl
+                : baseRef === "develop"
+                  ? `${pagesUrl}preview/`
+                  : null;
+
+            const pagesWorkflowId =
+              baseRef === "main" ? "pages-main.yml" : "pages-develop.yml";
+
+            const pagesRuns = await github.paginate(
+              github.rest.actions.listWorkflowRuns,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: pagesWorkflowId,
+                branch: baseRef,
+                per_page: 1,
+              },
+            );
+            const deployResult = pagesRuns[0]?.conclusion ?? "pending";
+
+            const deploySection = deployLink
+              ? [
+                  "",
+                  "## 🚀 Despliegue (Storybook)",
+                  deployResult === "success"
+                    ? `Se desplego correctamente la rama base \`${baseRef}\`: [${deployLink}](${deployLink})`
+                    : `Despliegue \`${deployResult}\` de la rama base \`${baseRef}\`: [${deployLink}](${deployLink})`,
+                ].join("\n")
+              : "";
 
             const formattedFiles = files
               .split("\n")
@@ -138,10 +222,8 @@ jobs:
               `\`${types}\``,
               "",
               "## ☑️ Checklist CI",
-              "- [x] Commitlint",
-              "- [x] Lint",
-              "- [x] Tests",
-              "- [x] Security audit",
+              checklist,
+              deploySection,
               "",
               "_PR actualizado automáticamente por CI_ 🤖",
             ].join("\n");

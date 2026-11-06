@@ -1,0 +1,63 @@
+name: Pages (main)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy Storybook to Pages (production + preview)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build Storybook (production, base /satoshi-rc-ui/)
+        run: npm run build:storybook
+        env:
+          STORYBOOK_BASE_PATH: /satoshi-rc-ui/
+
+      - name: Move production build
+        run: mv docs/storybook /tmp/storybook-prod
+
+      - name: Build Storybook (preview, base /satoshi-rc-ui/preview/)
+        run: npm run build:storybook
+        env:
+          STORYBOOK_BASE_PATH: /satoshi-rc-ui/preview/
+
+      - name: Compose Pages site
+        run: |
+          mkdir -p pages-site/preview
+          cp -r /tmp/storybook-prod/. pages-site/
+          cp -r docs/storybook/. pages-site/preview/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages-site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
