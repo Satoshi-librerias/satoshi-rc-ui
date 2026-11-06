@@ -75,8 +75,11 @@ const config: StorybookConfig = {
           replacement,
         }));
 
+    const basePath = process.env.STORYBOOK_BASE_PATH ?? "/";
+
     return {
       ...config,
+      base: basePath,
       plugins: [...(config.plugins ?? []), tailwindcss()],
       resolve: {
         ...config.resolve,

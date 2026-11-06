@@ -25,7 +25,10 @@ o documentacion equivalente) y en su propia documentacion.
 4. Opcional: crea o revisa el `AGENTS.md` del repo (u otro rulebook) para el
    stack, comandos, puertos y convenciones de codigo especificas. El nucleo lo
    referencia si existe, pero ningun paso de instalacion lo exige: el kit
-   funciona sin el.
+   funciona sin el. Convenciones que el kit espera por defecto: componentes con
+   Tailwind CSS responsive, estructura de capas del proyecto, pruebas unitarias
+   obligatorias para cada pieza nueva o modificada, y documentacion de codigo
+   generada con JSDoc sin caracteres especiales (acentos, enes).
 5. Ejecuta `node .github/tools/validate-kit.mjs` para verificar la instalacion.
 
 ## Actualizacion
