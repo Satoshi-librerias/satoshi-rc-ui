@@ -150,10 +150,22 @@ jobs:
             const lintResult = process.env.LINT_RESULT || "skipped";
             const securityResult = process.env.SECURITY_AUDIT_RESULT || "skipped";
 
+            const unitTestRuns = await github.paginate(
+              github.rest.actions.listWorkflowRuns,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: "unit-tests.yml",
+                head_sha: pr.head.sha,
+                per_page: 1,
+              },
+            );
+            const testResult = unitTestRuns[0]?.conclusion ?? "pending";
+
             const checklist = [
               `- [${checkmark(commitlintResult)}] Commitlint (\`${commitlintResult}\`)`,
               `- [${checkmark(lintResult)}] Lint (\`${lintResult}\`)`,
-              `- [ ] Tests (se ejecutan en el workflow "Unit Tests")`,
+              `- [${checkmark(testResult)}] Tests (\`${testResult}\`)`,
               `- [${checkmark(securityResult)}] Security audit (\`${securityResult}\`)`,
             ].join("\n");
 
