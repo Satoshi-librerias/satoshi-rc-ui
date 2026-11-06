@@ -23,7 +23,7 @@ const MAX_FUNCTION_PARAMETERS = 4;
 
 const IGNORED_MAGIC_NUMBERS = [-1, 0, 1];
 
-const DOCUMENTATION_WITHOUT_ACCENTS = "^[^áéíóúÁÉÍÓÚüÜñÑ¿¡]*$";
+const DOCUMENTATION_ASCII_ONLY = "^[ -~\n\r\t]*$";
 
 /**
  * @description Configures TypeScript, React, documentation and code quality.
@@ -254,7 +254,7 @@ export default defineConfig([
         "error",
         {
           contexts: ["any"],
-          matchDescription: DOCUMENTATION_WITHOUT_ACCENTS,
+          matchDescription: DOCUMENTATION_ASCII_ONLY,
 
           tags: {
             description: true,
@@ -269,7 +269,8 @@ export default defineConfig([
             todo: true,
           },
 
-          message: "Write documentation without Spanish accent marks.",
+          message:
+            "Write documentation in printable ASCII only, without accents, enes or special characters.",
         },
       ],
 
