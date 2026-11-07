@@ -23,16 +23,22 @@ jobs:
         id: signals
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
 
           BASE_REF="${{ github.base_ref }}"
 
-          FILES="$(git diff --name-only "origin/$BASE_REF...HEAD")"
-          TYPES="$(git log "origin/$BASE_REF..HEAD" --pretty=format:'%s' |
+          # The base branch must exist locally; with fetch-depth: 0 it always
+          # comes in, but guard anyway so labeling never hard-fails.
+          if ! git rev-parse --verify --quiet "origin/$BASE_REF" > /dev/null; then
+            git fetch origin "$BASE_REF" || true
+          fi
+
+          FILES="$(git diff --name-only "origin/$BASE_REF...HEAD" 2> /dev/null || true)"
+          TYPES="$(git log "origin/$BASE_REF..HEAD" --pretty=format:'%s' 2> /dev/null |
             sed -nE 's/^([a-zA-Z]+)(\([^)]*\))?!?:.*/\1/p' |
             tr '[:upper:]' '[:lower:]' |
             sort -u |
-            paste -sd ' ' -)"
+            paste -sd ' ' - || true)"
 
           {
             echo "files<<EOF"
