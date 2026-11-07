@@ -7,6 +7,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  issues: write
 
 jobs:
   label:
@@ -130,7 +131,8 @@ jobs:
               wanted.add(LABELS.chore);
             }
 
-            // Only labels that already exist in the repository.
+            // List current labels and create any wanted one that does not
+            // exist yet, so the PR is always labeled even on fresh repos.
             const existing = await github.paginate(
               github.rest.issues.listLabelsForRepo,
               {
@@ -140,6 +142,56 @@ jobs:
               },
             );
             const existingNames = new Set(existing.map((l) => l.name));
+
+            const LABEL_COLORS = {
+              typescript: "3178c6",
+              storybook: "ff4785",
+              documentation: "0075ca",
+              "github-actions": "2088ff",
+              styles: "5319e7",
+              tests: "0e8a16",
+              feature: "a2eeef",
+              fix: "d93f0b",
+              chore: "c5def5",
+              refactor: "fbca04",
+            };
+
+            const LABEL_DESCRIPTIONS = {
+              typescript: "Cambios en TypeScript",
+              storybook: "Cambios en Storybook / historias",
+              documentation: "Cambios en documentacion",
+              "github-actions": "Cambios en GitHub Actions / CI",
+              styles: "Cambios de estilos CSS / Tailwind",
+              tests: "Cambios en pruebas unitarias",
+              feature: "Nueva funcionalidad (feat)",
+              fix: "Correccion de errores (fix)",
+              chore: "Mantenimiento y CI (chore/ci)",
+              refactor: "Refactorizacion sin cambio de comportamiento",
+            };
+
+            // Create any wanted label that does not exist yet so the PR is
+            // always labeled, even on fresh repositories.
+            for (const name of wanted) {
+              if (!existingNames.has(name)) {
+                try {
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name,
+                    color: LABEL_COLORS[name] ?? "ededed",
+                    description: LABEL_DESCRIPTIONS[name],
+                  });
+                  existingNames.add(name);
+                } catch (error) {
+                  if (error.status === 422) {
+                    // Created concurrently by another run; treat as existing.
+                    existingNames.add(name);
+                  } else {
+                    throw error;
+                  }
+                }
+              }
+            }
 
             // Keep labels a human added manually.
             const manual = pr.labels
@@ -156,14 +208,5 @@ jobs:
               issue_number: pr.number,
               labels: [...new Set([...manual, ...toApply])],
             });
-
-            const missing = [...wanted].filter(
-              (name) => !existingNames.has(name),
-            );
-            if (missing.length > 0) {
-              core.warning(
-                `Labels not found in the repository (create them to enable them): ${missing.join(", ")}`,
-              );
-            }
 
             core.info(`Applied labels: ${[...manual, ...toApply].join(", ")}`);
