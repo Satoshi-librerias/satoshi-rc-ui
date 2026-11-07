@@ -150,17 +150,33 @@ jobs:
             const lintResult = process.env.LINT_RESULT || "skipped";
             const securityResult = process.env.SECURITY_AUDIT_RESULT || "skipped";
 
-            const unitTestRuns = await github.paginate(
-              github.rest.actions.listWorkflowRuns,
-              {
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                workflow_id: "unit-tests.yml",
-                head_sha: pr.head.sha,
-                per_page: 1,
-              },
-            );
-            const testResult = unitTestRuns[0]?.conclusion ?? "pending";
+            // Workflow files added on the PR branch are not visible to the
+            // Actions API until they land on the default branch: those
+            // lookups return 404 and must not fail the job.
+            const latestRunFor = async (workflowId, filters) => {
+              try {
+                const runs = await github.paginate(
+                  github.rest.actions.listWorkflowRuns,
+                  {
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    workflow_id: workflowId,
+                    per_page: 1,
+                    ...filters,
+                  },
+                );
+                return runs[0]?.conclusion ?? "pending";
+              } catch (error) {
+                if (error.status === 404) {
+                  return "unknown";
+                }
+                throw error;
+              }
+            };
+
+            const testResult = await latestRunFor("unit-tests.yml", {
+              head_sha: pr.head.sha,
+            });
 
             const checklist = [
               `- [${checkmark(commitlintResult)}] Commitlint (\`${commitlintResult}\`)`,
@@ -180,17 +196,9 @@ jobs:
             const pagesWorkflowId =
               baseRef === "main" ? "pages-main.yml" : "pages-develop.yml";
 
-            const pagesRuns = await github.paginate(
-              github.rest.actions.listWorkflowRuns,
-              {
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                workflow_id: pagesWorkflowId,
-                branch: baseRef,
-                per_page: 1,
-              },
-            );
-            const deployResult = pagesRuns[0]?.conclusion ?? "pending";
+            const deployResult = await latestRunFor(pagesWorkflowId, {
+              branch: baseRef,
+            });
 
             const deploySection = deployLink
               ? [
