@@ -1,11 +1,12 @@
-import type { FC, JSX } from "react";
+import { memo, useCallback } from "react";
+import type { FC, JSX, MouseEvent } from "react";
 import { getButtonClasses } from "../utils/get-button-classes.util";
 import type { ButtonProps } from "../types/button.types";
 
 /**
  * @description Define las propiedades visuales resueltas del boton.
  * @author Steveen Cues
- * @version 1.0.2
+ * @version 1.1.0
  */
 interface ButtonViewProps {
   readonly children: React.ReactNode;
@@ -18,7 +19,7 @@ interface ButtonViewProps {
   readonly isOutlined: boolean;
   readonly ariaLabel: string | undefined;
   readonly className: string;
-  readonly onClick: (() => void) | undefined;
+  readonly onClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
 /**
@@ -37,9 +38,9 @@ interface ButtonViewProps {
  * @param props.onClick Callback ejecutado al hacer clic.
  * @returns Boton listo para renderizar.
  * @author Steveen Cues
- * @version 1.0.2
+ * @version 1.1.0
  */
-function ButtonView({
+const ButtonView = memo(function ButtonView({
   children,
   variant,
   size,
@@ -62,19 +63,26 @@ function ButtonView({
 
   const isDisabled = disabled || isLoading;
 
+  const handleClick = useCallback(
+    (event: MouseEvent<HTMLButtonElement>): void => {
+      onClick?.(event);
+    },
+    [onClick],
+  );
+
   return (
     <button
       aria-busy={isLoading}
       aria-label={ariaLabel}
       className={`${classes} ${className}`.trim()}
       disabled={isDisabled}
-      onClick={onClick}
+      onClick={handleClick}
       type={type ?? "button"}
     >
       {isLoading ? <span className="sr-only">{children}</span> : children}
     </button>
   );
-}
+});
 
 /**
  * @description Boton reutilizable con variantes visuales, tamanos, estado
@@ -97,25 +105,27 @@ function ButtonView({
  *   {t("common.save")}
  * </Button>
  * @author Steveen Cues
- * @version 1.0.2
+ * @version 1.1.0
  */
-export const Button: FC<ButtonProps> = (props): JSX.Element => {
-  return (
-    <ButtonView
-      ariaLabel={props.ariaLabel}
-      className={props.className ?? ""}
-      disabled={props.disabled ?? false}
-      isLoading={props.isLoading ?? false}
-      isFullWidth={props.isFullWidth ?? false}
-      isOutlined={props.isOutlined ?? false}
-      onClick={props.onClick}
-      size={props.size}
-      type={props.type}
-      variant={props.variant}
-    >
-      {props.children}
-    </ButtonView>
-  );
-};
+export const Button: FC<ButtonProps> = memo(
+  function Button(props): JSX.Element {
+    return (
+      <ButtonView
+        ariaLabel={props.ariaLabel}
+        className={props.className ?? ""}
+        disabled={props.disabled ?? false}
+        isLoading={props.isLoading ?? false}
+        isFullWidth={props.isFullWidth ?? false}
+        isOutlined={props.isOutlined ?? false}
+        onClick={props.onClick}
+        size={props.size}
+        type={props.type}
+        variant={props.variant}
+      >
+        {props.children}
+      </ButtonView>
+    );
+  },
+);
 
 export default Button;

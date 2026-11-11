@@ -1,6 +1,5 @@
 import { useRef, type FC, type JSX } from "react";
 import {
-  LANGUAGE_SELECTOR_LABEL,
   LanguageSelectorList,
   type LanguageSelectorProps,
   LanguageSelectorSearch,
@@ -38,10 +37,6 @@ export const LanguageSelector: FC<LanguageSelectorProps> = ({
       className={`relative w-full min-w-0 ${className}`.trim()}
       ref={containerRef}
     >
-      <span className="mb-2 block text-sm font-medium">
-        {LANGUAGE_SELECTOR_LABEL}
-      </span>
-
       <LanguageSelectorTrigger
         isOpen={isOpen}
         language={language}

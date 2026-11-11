@@ -1,4 +1,4 @@
-import type { FC, JSX } from "react";
+import type { FC, JSX, MouseEvent } from "react";
 import {
   Container,
   Logo,
@@ -103,6 +103,17 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
     />
   );
 
+  const handleSelectorClick = (event: MouseEvent<HTMLDivElement>): void => {
+    if (
+      event.target instanceof Element &&
+      event.target.closest('[aria-haspopup="listbox"]') !== null
+    ) {
+      return;
+    }
+
+    closeMenu();
+  };
+
   const brand = renderVisibleBrand(config);
 
   return (
@@ -142,7 +153,7 @@ export const Header: FC<HeaderProps> = (props): JSX.Element => {
 
         <div
           className="flex flex-col gap-2"
-          onClick={closeMenu}
+          onClick={handleSelectorClick}
           role="presentation"
         >
           {selectors}

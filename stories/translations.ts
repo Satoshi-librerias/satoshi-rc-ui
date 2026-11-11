@@ -8,6 +8,23 @@ import type { TranslationCatalog } from "@domain";
  */
 export const STORY_TRANSLATIONS: TranslationCatalog = {
   es: {
+    molecules: {
+      pagination: "Paginacion",
+      nextPage: "Pagina siguiente",
+      previousPage: "Pagina anterior",
+      stepper: "Progreso del proceso",
+      accordion: "Preguntas frecuentes",
+      list: "Lista de elementos",
+    },
+    atoms: {
+      progressLabel: "Progreso de carga",
+      switchLabel: "Notificaciones",
+      radioGroup: "Elige tu plan",
+      radioFree: "Plan gratuito",
+      radioPro: "Plan profesional",
+      skeletonLabel: "Cargando contenido",
+      shortcut: "Atajo de teclado",
+    },
     menu: {
       open: "Abrir menu",
       close: "Cerrar menu",
@@ -54,6 +71,23 @@ export const STORY_TRANSLATIONS: TranslationCatalog = {
   },
 
   en: {
+    molecules: {
+      pagination: "Pagination",
+      nextPage: "Next page",
+      previousPage: "Previous page",
+      stepper: "Process progress",
+      accordion: "Frequently asked questions",
+      list: "Item list",
+    },
+    atoms: {
+      progressLabel: "Loading progress",
+      switchLabel: "Notifications",
+      radioGroup: "Choose your plan",
+      radioFree: "Free plan",
+      radioPro: "Professional plan",
+      skeletonLabel: "Loading content",
+      shortcut: "Keyboard shortcut",
+    },
     menu: {
       open: "Open menu",
       close: "Close menu",
@@ -100,6 +134,23 @@ export const STORY_TRANSLATIONS: TranslationCatalog = {
   },
 
   fr: {
+    molecules: {
+      pagination: "Pagination",
+      nextPage: "Page suivante",
+      previousPage: "Page precedente",
+      stepper: "Progression du processus",
+      accordion: "Questions frequentes",
+      list: "Liste d'elements",
+    },
+    atoms: {
+      progressLabel: "Progression du chargement",
+      switchLabel: "Notifications",
+      radioGroup: "Choisissez votre forfait",
+      radioFree: "Forfait gratuit",
+      radioPro: "Forfait professionnel",
+      skeletonLabel: "Chargement du contenu",
+      shortcut: "Raccourci clavier",
+    },
     menu: {
       open: "Ouvrir le menu",
       close: "Fermer le menu",
@@ -115,6 +166,23 @@ export const STORY_TRANSLATIONS: TranslationCatalog = {
   },
 
   de: {
+    molecules: {
+      pagination: "Seitennavigation",
+      nextPage: "Naechste Seite",
+      previousPage: "Vorherige Seite",
+      stepper: "Prozessfortschritt",
+      accordion: "Haeufige Fragen",
+      list: "Elementliste",
+    },
+    atoms: {
+      progressLabel: "Ladefortschritt",
+      switchLabel: "Benachrichtigungen",
+      radioGroup: "Waehle deinen Tarif",
+      radioFree: "Kostenloser Tarif",
+      radioPro: "Professioneller Tarif",
+      skeletonLabel: "Inhalt wird geladen",
+      shortcut: "Tastenkuerzel",
+    },
     menu: {
       open: "Menü öffnen",
       close: "Menü schließen",
@@ -130,6 +198,23 @@ export const STORY_TRANSLATIONS: TranslationCatalog = {
   },
 
   pt: {
+    molecules: {
+      pagination: "Paginacao",
+      nextPage: "Proxima pagina",
+      previousPage: "Pagina anterior",
+      stepper: "Progresso do processo",
+      accordion: "Perguntas frequentes",
+      list: "Lista de itens",
+    },
+    atoms: {
+      progressLabel: "Progresso do carregamento",
+      switchLabel: "Notificacoes",
+      radioGroup: "Escolha seu plano",
+      radioFree: "Plano gratuito",
+      radioPro: "Plano profissional",
+      skeletonLabel: "Carregando conteudo",
+      shortcut: "Atalho do teclado",
+    },
     menu: {
       open: "Abrir menu",
       close: "Fechar menu",
@@ -145,6 +230,23 @@ export const STORY_TRANSLATIONS: TranslationCatalog = {
   },
 
   it: {
+    molecules: {
+      pagination: "Paginazione",
+      nextPage: "Pagina successiva",
+      previousPage: "Pagina precedente",
+      stepper: "Avanzamento del processo",
+      accordion: "Domande frequenti",
+      list: "Elenco di elementi",
+    },
+    atoms: {
+      progressLabel: "Progresso del caricamento",
+      switchLabel: "Notifiche",
+      radioGroup: "Scegli il tuo piano",
+      radioFree: "Piano gratuito",
+      radioPro: "Piano professionale",
+      skeletonLabel: "Caricamento contenuto",
+      shortcut: "Scorciatoia da tastiera",
+    },
     menu: {
       open: "Apri menu",
       close: "Chiudi menu",

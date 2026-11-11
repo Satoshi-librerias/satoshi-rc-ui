@@ -28,7 +28,7 @@ describe("ThemeSelectorTrigger (atomo)", (): void => {
     expect(screen.getByText("Claro")).toBeInTheDocument();
   });
 
-  it("muestra la etiqueta de seleccion en pantallas medianas", (): void => {
+  it("evita repetir la etiqueta de seleccion debajo del tema activo", (): void => {
     renderWithProviders(
       <ThemeSelectorTrigger
         theme={createAppTheme("light")}
@@ -38,7 +38,7 @@ describe("ThemeSelectorTrigger (atomo)", (): void => {
       />,
     );
 
-    expect(screen.getByText("Seleccionado")).toBeInTheDocument();
+    expect(screen.queryByText("Seleccionado")).not.toBeInTheDocument();
   });
 
   it("refleja el estado abierto en aria-expanded", (): void => {
@@ -103,7 +103,7 @@ describe("ThemeSelectorTrigger (atomo)", (): void => {
     expect(onToggle).toHaveBeenCalledTimes(1);
   });
 
-  it("muestra la inicial del tema en mayuscula", (): void => {
+  it("muestra el indicador de color del tema activo", (): void => {
     renderWithProviders(
       <ThemeSelectorTrigger
         theme={createAppTheme("dark")}
@@ -113,7 +113,7 @@ describe("ThemeSelectorTrigger (atomo)", (): void => {
       />,
     );
 
-    expect(screen.getByText("O")).toBeInTheDocument();
+    expect(document.querySelector('[data-theme="dark"]')).toBeInTheDocument();
   });
 });
 

@@ -70,9 +70,24 @@ export const CONTAINER_PADDING_CLASSES: Record<
   string
 > = {
   none: "",
-  sm: "p-2",
-  md: "p-4",
-  lg: "p-8",
+  sm: "p-2 sm:p-3",
+  md: "p-4 sm:p-6",
+  lg: "p-6 sm:p-8",
+};
+
+/**
+ * @description Define el espaciado vertical semantico de las secciones.
+ * @author Steveen Cues
+ * @version 1.0.0
+ */
+export const CONTAINER_SECTION_SPACING_CLASSES: Record<
+  NonNullable<ContainerClassOptions["sectionSpacing"]>,
+  string
+> = {
+  none: "",
+  compact: "py-8 sm:py-10 lg:py-12",
+  standard: "py-12 sm:py-16 lg:py-20",
+  spacious: "py-16 sm:py-20 lg:py-24",
 };
 
 /**

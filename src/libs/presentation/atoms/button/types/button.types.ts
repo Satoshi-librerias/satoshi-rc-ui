@@ -29,7 +29,7 @@ export interface ButtonProps {
   readonly isOutlined?: boolean;
   readonly ariaLabel?: string;
   readonly className?: string;
-  readonly onClick?: () => void;
+  readonly onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 /**
