@@ -10,7 +10,9 @@ export interface ContainerProps {
   readonly direction?: "row" | "column";
   readonly gap?: "none" | "xs" | "sm" | "md" | "lg";
   readonly padding?: "none" | "sm" | "md" | "lg";
+  readonly sectionSpacing?: "none" | "compact" | "standard" | "spacious";
   readonly className?: string;
+  readonly id?: string;
   readonly as?: "div" | "section" | "nav" | "header" | "footer";
 }
 
@@ -25,4 +27,5 @@ export interface ContainerClassOptions {
   readonly direction: NonNullable<ContainerProps["direction"]>;
   readonly gap: NonNullable<ContainerProps["gap"]>;
   readonly padding: NonNullable<ContainerProps["padding"]>;
+  readonly sectionSpacing?: NonNullable<ContainerProps["sectionSpacing"]>;
 }

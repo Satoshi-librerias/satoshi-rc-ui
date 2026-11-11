@@ -74,6 +74,14 @@ export const EXTENDED_THEMES: readonly AppTheme[] = [
  */
 export const TEST_TRANSLATIONS = {
   es: {
+    molecules: {
+      pagination: "Paginacion",
+      nextPage: "Pagina siguiente",
+      previousPage: "Pagina anterior",
+      stepper: "Progreso del proceso",
+      accordion: "Preguntas frecuentes",
+      list: "Lista de elementos",
+    },
     theme: {
       title: "Temas",
       selected: "Seleccionado",
@@ -101,6 +109,14 @@ export const TEST_TRANSLATIONS = {
     },
   },
   en: {
+    molecules: {
+      pagination: "Pagination",
+      nextPage: "Next page",
+      previousPage: "Previous page",
+      stepper: "Process progress",
+      accordion: "Frequently asked questions",
+      list: "Item list",
+    },
     theme: {
       title: "Themes",
       selected: "Selected",

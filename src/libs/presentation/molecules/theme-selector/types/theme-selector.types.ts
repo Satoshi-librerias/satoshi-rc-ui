@@ -8,6 +8,7 @@ import type { RefObject } from "react";
  */
 export interface ThemeSelectorTranslations {
   readonly title?: string;
+  readonly select?: string;
   readonly selected?: string;
   readonly searchPlaceholder?: string;
   readonly empty?: string;
@@ -51,7 +52,8 @@ export interface ThemeSelectorProps {
 export interface ThemeSelectorTriggerProps {
   readonly theme: AppTheme;
   readonly isOpen: boolean;
-  readonly selectedLabel: string;
+  readonly ariaLabel?: string;
+  readonly selectedLabel?: string;
   readonly onToggle: () => void;
 }
 
@@ -129,19 +131,8 @@ export interface ThemeSelectorOptionProps {
  * @version 1.0.0
  */
 export interface ThemeSelectorMessages extends ThemeSelectorPanelTranslations {
+  readonly select: string;
   readonly selected: string;
-}
-
-/**
- * @description Define las propiedades del boton que abre el selector.
- * @author Steveen Cues
- * @version 1.0.0
- */
-export interface ThemeSelectorTriggerProps {
-  readonly theme: AppTheme;
-  readonly isOpen: boolean;
-  readonly selectedLabel: string;
-  readonly onToggle: () => void;
 }
 
 /**

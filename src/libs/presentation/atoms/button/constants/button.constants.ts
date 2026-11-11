@@ -31,7 +31,7 @@ export const BUTTON_SIZE_CLASSES: Record<ButtonSize, string> = {
  * @author Steveen Cues
  * @version 1.0.0
  */
-export const BUTTON_BASE_CLASS = "btn";
+export const BUTTON_BASE_CLASS = "btn rounded-xl";
 
 /**
  * @description Define la clase que activa el estilo con borde.

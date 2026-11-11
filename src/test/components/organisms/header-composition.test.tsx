@@ -40,7 +40,10 @@ describe("HeaderComposition", (): void => {
     expect(screen.getByRole("banner")).toBeInTheDocument();
     expect(screen.getByAltText("Marca")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Inicio" })).toBeInTheDocument();
-    expect(screen.getByText("Idioma")).toBeInTheDocument();
+    expect(screen.queryByText("Idioma")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Seleccionar idioma" }),
+    ).toBeInTheDocument();
   });
 
   it("permite omitir cualquiera de las secciones", (): void => {

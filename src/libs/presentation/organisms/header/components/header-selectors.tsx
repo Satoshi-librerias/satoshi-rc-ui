@@ -32,13 +32,13 @@ export const HeaderSelectors: FC<
   return (
     <div className="flex flex-wrap items-center gap-2">
       {showThemeSelector && (
-        <div className="w-40 sm:w-48 min-w-0">
+        <div className="w-40 min-w-0">
           <ThemeSelector />
         </div>
       )}
 
       {showLanguageSelector && (
-        <div className="w-36 sm:w-40 min-w-0">
+        <div className="w-40 min-w-0">
           <LanguageSelector />
         </div>
       )}
