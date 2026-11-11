@@ -5,6 +5,7 @@ import {
   CONTAINER_GAP_CLASSES,
   CONTAINER_MAX_WIDTH_CLASSES,
   CONTAINER_PADDING_CLASSES,
+  CONTAINER_SECTION_SPACING_CLASSES,
 } from "../constants/container.constants";
 import type { ContainerClassOptions } from "../types/container.types";
 
@@ -16,6 +17,7 @@ import type { ContainerClassOptions } from "../types/container.types";
  * @param options.direction Direccion del flujo.
  * @param options.gap Espaciado entre elementos.
  * @param options.padding Relleno interior.
+ * @param options.sectionSpacing Ritmo vertical de seccion.
  * @returns Cadena de clases lista para el atributo className.
  * @author Steveen Cues
  * @version 1.0.0
@@ -32,6 +34,7 @@ export function getContainerClasses(
     CONTAINER_DIRECTION_CLASSES[options.direction],
     CONTAINER_GAP_CLASSES[options.gap],
     CONTAINER_PADDING_CLASSES[options.padding],
+    CONTAINER_SECTION_SPACING_CLASSES[options.sectionSpacing ?? "none"],
   ];
 
   return classes

@@ -55,6 +55,7 @@ export const ThemeSelector: FC<ThemeSelectorProps> = ({
       <ThemeSelectorTrigger
         theme={theme}
         isOpen={isOpen}
+        ariaLabel={messages.select}
         selectedLabel={messages.selected}
         onToggle={handleToggle}
       />

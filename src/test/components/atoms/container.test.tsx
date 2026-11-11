@@ -39,6 +39,24 @@ describe("Container", (): void => {
     expect(screen.getByText("Contenido")).toHaveClass("gap-8");
   });
 
+  it("aplica el espaciado vertical semantico de seccion", (): void => {
+    renderWithProviders(
+      <Container sectionSpacing="standard">Contenido</Container>,
+    );
+
+    expect(screen.getByText("Contenido")).toHaveClass(
+      "py-12",
+      "sm:py-16",
+      "lg:py-20",
+    );
+  });
+
+  it("escala el padding en breakpoints mas amplios", (): void => {
+    renderWithProviders(<Container padding="md">Contenido</Container>);
+
+    expect(screen.getByText("Contenido")).toHaveClass("p-4", "sm:p-6");
+  });
+
   it("renderiza con la etiqueta semantica configurada", (): void => {
     renderWithProviders(
       <Container as="section" align="center">
@@ -47,6 +65,19 @@ describe("Container", (): void => {
     );
 
     expect(screen.getByText("Contenido").tagName).toBe("SECTION");
+  });
+
+  it("aplica el identificador configurado", (): void => {
+    renderWithProviders(
+      <Container id="featured-work" as="section">
+        Contenido
+      </Container>,
+    );
+
+    expect(screen.getByText("Contenido").closest("section")).toHaveAttribute(
+      "id",
+      "featured-work",
+    );
   });
 
   it("combina las clases adicionales configuradas", (): void => {

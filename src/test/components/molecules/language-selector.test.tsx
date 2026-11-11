@@ -16,10 +16,13 @@ describe("LanguageSelector", (): void => {
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
-  it("muestra la etiqueta del selector", (): void => {
+  it("no muestra una etiqueta encima del activador", (): void => {
     renderWithProviders(<LanguageSelector />);
 
-    expect(screen.getByText("Idioma")).toBeInTheDocument();
+    expect(screen.queryByText("Idioma")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Seleccionar idioma" }),
+    ).toBeInTheDocument();
   });
 
   it("abre el panel al hacer clic en el activador", async (): Promise<void> => {

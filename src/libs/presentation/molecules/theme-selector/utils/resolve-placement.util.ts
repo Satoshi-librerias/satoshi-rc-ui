@@ -35,6 +35,20 @@ const PANEL_GAP = 8;
 const MAX_PANEL_HEIGHT = 448;
 
 /**
+ * @description Define el ancho maximo y margen lateral del panel.
+ * @author Steveen Cues
+ * @version 1.0.0
+ */
+const MAX_PANEL_WIDTH = 320;
+
+/**
+ * @description Define el margen minimo del panel respecto al viewport.
+ * @author Steveen Cues
+ * @version 1.0.0
+ */
+const VIEWPORT_MARGIN = 16;
+
+/**
  * @description Calcula la colocacion del panel segun el espacio disponible.
  * Prioriza abrir hacia abajo y alinear a la derecha; invierte la direccion
  * cuando el panel quedaria fuera del viewport.
@@ -61,9 +75,18 @@ export const resolveThemeSelectorPlacement = ({
     ),
   );
 
-  const spaceRight = viewport.width - container.right;
-  const spaceLeft = container.left;
-  const alignLeft = spaceRight < 0 && spaceLeft > spaceRight;
+  const panelWidth = Math.min(
+    MAX_PANEL_WIDTH,
+    viewport.width - VIEWPORT_MARGIN - VIEWPORT_MARGIN,
+  );
+  const overflowWhenRightAligned = Math.max(0, panelWidth - container.right);
+  const overflowWhenLeftAligned = Math.max(
+    0,
+    container.left + panelWidth - viewport.width,
+  );
+  const alignLeft =
+    overflowWhenRightAligned > 0 &&
+    overflowWhenLeftAligned <= overflowWhenRightAligned;
 
   return {
     vertical: openUpwards ? "top" : "bottom",

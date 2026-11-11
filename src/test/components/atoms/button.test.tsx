@@ -19,7 +19,11 @@ describe("Button", (): void => {
   it("usa la variante primaria por defecto", (): void => {
     renderWithProviders(<Button>Accion</Button>);
 
-    expect(screen.getByRole("button")).toHaveClass("btn", "btn-primary");
+    expect(screen.getByRole("button")).toHaveClass(
+      "btn",
+      "btn-primary",
+      "rounded-xl",
+    );
   });
 
   it("aplica la variante configurada", (): void => {

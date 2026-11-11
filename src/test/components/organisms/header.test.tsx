@@ -93,7 +93,10 @@ describe("Header (generico)", (): void => {
       translations: HEADER_TRANSLATIONS,
     });
 
-    expect(screen.getByText("Idioma")).toBeInTheDocument();
+    expect(screen.queryByText("Idioma")).not.toBeInTheDocument();
+    expect(
+      screen.getAllByRole("button", { name: "Seleccionar idioma" }),
+    ).toHaveLength(1);
   });
 
   it("renderiza acciones adicionales personalizadas", (): void => {
@@ -147,7 +150,6 @@ describe("Header (generico)", (): void => {
       translations: HEADER_TRANSLATIONS,
     });
 
-    await user.click(screen.getByText("Idioma"));
     await user.click(
       screen.getByRole("button", { name: "Seleccionar idioma" }),
     );

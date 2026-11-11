@@ -15,6 +15,17 @@ const resolveTranslation = (
 ): string => translate(key ?? fallback);
 
 /**
+ * @description Resuelve la etiqueta accesible del selector de temas.
+ * @author Steveen Cues
+ * @version 1.0.0
+ */
+const resolveSelectLabel = (
+  translations: ThemeSelectorTranslations | undefined,
+  translate: (key: string) => string,
+): string =>
+  resolveTranslation(translations?.select, "theme.select", translate);
+
+/**
  * @description Traduce los mensajes configurables del selector de temas.
  * @author Steveen Cues
  * @version 1.1.0
@@ -28,6 +39,7 @@ export const translateThemeSelectorMessages = (
   translate: (key: string) => string,
 ): ThemeSelectorMessages => ({
   title: resolveTranslation(translations?.title, label, translate),
+  select: resolveSelectLabel(translations, translate),
   selected: resolveTranslation(
     translations?.selected,
     "theme.selected",
