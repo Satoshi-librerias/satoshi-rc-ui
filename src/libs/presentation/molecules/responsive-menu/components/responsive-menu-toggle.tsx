@@ -4,9 +4,10 @@ import { RESPONSIVE_MENU_PANEL_ID_PREFIX } from "../constants/responsive-menu.co
 
 /**
  * @description Boton que alterna la visibilidad del menu movil con
- * atributos accesibles y icono animado.
+ * atributos accesibles e icono animado. Usa un objetivo tactil generoso
+ * con borde redondeado y estados de hover y foco visibles.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const ResponsiveMenuToggle: FC<ResponsiveMenuToggleProps> = ({
   isOpen,
@@ -22,7 +23,7 @@ export const ResponsiveMenuToggle: FC<ResponsiveMenuToggleProps> = ({
       aria-controls={panelId}
       aria-expanded={isOpen}
       aria-label={label}
-      className="btn btn-ghost btn-sm md:hidden"
+      className="btn btn-circle shrink-0 border border-base-300 bg-base-100/80 text-base-content shadow-sm transition-colors hover:border-primary hover:bg-base-200 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:hidden"
       onClick={onToggle}
       type="button"
     >

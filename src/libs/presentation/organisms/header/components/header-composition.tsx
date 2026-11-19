@@ -1,5 +1,6 @@
 import type { FC, JSX } from "react";
 import { Container } from "@presentation";
+import { getHeaderSurfaceClasses } from "../utils/get-header-surface-classes.util";
 import type {
   HeaderActionsProps,
   HeaderBrandProps,
@@ -61,10 +62,12 @@ export const HeaderActions: FC<HeaderActionsProps> = ({
 export const HeaderComposition: FC<HeaderCompositionProps> = ({
   children,
   className = "",
+  position = "static",
+  surface = "solid",
 }): JSX.Element => {
   return (
     <header
-      className={`border-b border-base-300 bg-base-100 ${className}`.trim()}
+      className={`${getHeaderSurfaceClasses(position, surface)} ${className}`.trim()}
     >
       <Container
         maxWidth="xl"

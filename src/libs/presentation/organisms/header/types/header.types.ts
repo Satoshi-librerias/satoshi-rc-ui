@@ -1,4 +1,9 @@
 import type { NavigationItem } from "../../../molecules/navigation/types/navigation.types";
+import type {
+  HeaderLayoutConfig,
+  HeaderPosition,
+  HeaderSurface,
+} from "./header-layout.types";
 
 /**
  * @description Define las propiedades del logo dentro del Header generico.
@@ -27,11 +32,12 @@ export interface HeaderTranslations {
 /**
  * @description Define las propiedades del Header generico configurables.
  * Permite mostrar u ocultar logo, navegacion, selector de tema y selector
- * de idioma de forma independiente.
+ * de idioma de forma independiente, y configurar posicion, superficie,
+ * distribucion del logo y selectores en movil.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 2.0.0
  */
-export interface HeaderProps {
+export interface HeaderProps extends HeaderLayoutConfig {
   readonly logo?: HeaderLogoConfig;
   readonly navigationItems?: readonly NavigationItem[];
   readonly showLogo?: boolean;
@@ -46,11 +52,13 @@ export interface HeaderProps {
 /**
  * @description Define las propiedades del Header por composicion.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 2.0.0
  */
 export interface HeaderCompositionProps {
   readonly children: React.ReactNode;
   readonly className?: string;
+  readonly position?: HeaderPosition;
+  readonly surface?: HeaderSurface;
 }
 
 /**
