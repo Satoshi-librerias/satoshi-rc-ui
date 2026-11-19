@@ -88,4 +88,17 @@ describe("HeaderComposition", (): void => {
     expect(screen.getByRole("banner")).toHaveClass("personalizado");
     expect(screen.getByText("Contenido")).toHaveClass("marca");
   });
+
+  it("aplica superficie transparente y posicion fija configuradas", (): void => {
+    renderWithProviders(
+      <HeaderComposition position="fixed" surface="transparent">
+        <HeaderBrand>Contenido</HeaderBrand>
+      </HeaderComposition>,
+    );
+
+    const banner = screen.getByRole("banner");
+
+    expect(banner).toHaveClass("fixed", "backdrop-blur-md", "shadow-md");
+    expect(banner).not.toHaveClass("bg-base-100");
+  });
 });

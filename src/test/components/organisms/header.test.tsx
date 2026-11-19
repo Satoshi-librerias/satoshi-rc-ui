@@ -176,4 +176,54 @@ describe("Header (generico)", (): void => {
       ).toBeInTheDocument();
     });
   });
+
+  it("aplica posicion fija y superficie transparente configuradas", (): void => {
+    renderWithProviders(
+      <Header
+        logo={{ alt: "Marca", src: "/logo.svg" }}
+        navigationItems={NAVIGATION_ITEMS}
+        position="fixed"
+        surface="transparent"
+      />,
+      { translations: HEADER_TRANSLATIONS },
+    );
+
+    const banner = screen.getByRole("banner");
+
+    expect(banner).toHaveClass("fixed", "backdrop-blur-md", "shadow-md");
+    expect(banner).not.toHaveClass("bg-base-100");
+  });
+
+  it("coloca el logo a la derecha cuando logoPosition es right", (): void => {
+    renderWithProviders(
+      <Header
+        logo={{ alt: "Marca", src: "/logo.svg" }}
+        navigationItems={NAVIGATION_ITEMS}
+        logoPosition="right"
+      />,
+      { translations: HEADER_TRANSLATIONS },
+    );
+
+    const logo = screen.getByAltText("Marca");
+    const languageButton = screen.getAllByRole("button", {
+      name: "Seleccionar idioma",
+    })[0];
+
+    expect(
+      logo.compareDocumentPosition(languageButton) &
+        Node.DOCUMENT_POSITION_PRECEDING,
+    ).toBeTruthy();
+  });
+
+  it("muestra los selectores compactos en la barra movil cuando mobileSelectors es compact", (): void => {
+    renderWithProviders(
+      <Header navigationItems={NAVIGATION_ITEMS} mobileSelectors="compact" />,
+      { translations: HEADER_TRANSLATIONS },
+    );
+
+    expect(
+      screen.getAllByRole("button", { name: "Seleccionar idioma" }).length,
+    ).toBeGreaterThan(0);
+    expect(screen.queryByText("Idioma")).not.toBeInTheDocument();
+  });
 });
