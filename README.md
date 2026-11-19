@@ -19,6 +19,20 @@ personalizable y mantenible para aplicaciones React.
   `.tgz`.
 - **GitHub Actions:** automatización de validaciones y generación de artefactos.
 
+## UI Kit y composición
+
+Usa `Container` para anchos, insets responsive y ritmo vertical semántico
+(`sectionSpacing="standard"`); combina `SectionHeading` para eyebrow, título,
+subtítulo y acción. El nivel HTML (`level`) es independiente del tamaño visual
+(`size`), y `align` permite una composición inicial o centrada. Para preservar
+consistencia entre temas, usa tokens DaisyUI semánticos (`base-100`,
+`base-content`, `primary`) y evita colores específicos de una aplicación
+consumidora.
+
+La especificación, el plan y las tareas están en
+[`.github/specs/ui-kit/`](./.github/specs/ui-kit/). Síguelos antes de cambiar el
+contrato visual o agregar patrones compartidos.
+
 ## 📋 Requisitos
 
 Antes de comenzar, asegúrate de tener instalado:
