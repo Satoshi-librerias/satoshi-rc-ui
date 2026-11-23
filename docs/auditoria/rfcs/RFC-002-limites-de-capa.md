@@ -18,7 +18,7 @@ Sin embargo, el código actual presenta tres violaciones:
 
 1. **Dependencia invertida:**
    `infraestructura/storage/encrypted-preference.storage.ts` importa
-   `decryptText`, `encryptText`, `getLocalStorage` desde `@aplicacion`. La capa
+   `decryptText`, `encryptText`, `getLocalStorage` desde `aplicacion`. La capa
    de infraestructura (la más baja después de domain) no puede depender de la
    capa de aplicación.
 2. **Bypass de infraestructura:** `aplicacion/utils/theme.utils.ts` accede a
@@ -47,7 +47,7 @@ infraestructura:
 
 `encrypted-preference.storage.ts` pasa a importar de rutas relativas dentro de
 `infraestructura` (sin alias cruzado de capa). `aplicacion` consume
-`@infraestructura` como corresponde.
+`infraestructura` como corresponde.
 
 ### 2.2 Centralizar la persistencia de tema en infraestructura
 
@@ -61,7 +61,7 @@ infraestructura:
 
 `translate.provider.tsx` importa `LanguagePreferenceConfiguration`,
 `LanguagePreferenceState`, `LanguagePreferenceResult` y
-`SetLanguagePreferenceState` desde `@domain` y se borran las declaraciones
+`SetLanguagePreferenceState` desde `domain` y se borran las declaraciones
 locales.
 
 ## 3. Alternativas consideradas
@@ -86,8 +86,8 @@ locales.
 ## 5. Criterio de aceptación
 
 ```bash
-# Ningún archivo de infraestructura importa de @aplicacion o @presentation
-grep -rn "@aplicacion\|@presentation" src/libs/infraestructura/  # → 0 resultados
+# Ningún archivo de infraestructura importa de aplicacion o presentation
+grep -rn "aplicacion\|presentation" src/libs/infraestructura/  # → 0 resultados
 # Ningún archivo de aplicacion toca window.localStorage/document directamente
 grep -rn "window.localStorage\|window.document" src/libs/aplicacion/  # → 0 resultados
 npm run lint && npm run build:lib  # ✅

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Kbd } from "@presentation";
-import { useLanguage } from "@aplicacion";
+import { Kbd } from "@components";
+import { useLanguage } from "@libs";
 
 /**
  * @description Stories de la tecla de atajo reutilizable de la libreria.

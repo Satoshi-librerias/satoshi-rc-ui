@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Progress } from "@presentation";
-import { useLanguage } from "@aplicacion";
+import { Progress } from "@components";
+import { useLanguage } from "@libs";
 
 /**
  * @description Stories de la barra de progreso reutilizable de la libreria.

@@ -1,7 +1,7 @@
 import type { FC, JSX } from "react";
 
-import { useLanguage } from "@aplicacion";
-import { type ThemeSelectorTriggerProps } from "@presentation";
+import { useLanguage } from "@libs";
+import { type ThemeSelectorTriggerProps } from "../types";
 
 /**
  * @description Renderiza el activador del selector de temas.

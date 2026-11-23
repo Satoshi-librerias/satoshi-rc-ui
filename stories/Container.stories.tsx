@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Container } from "@presentation";
+import { Container } from "@components";
 
 /**
  * @description Stories del contenedor de contenido de la libreria.

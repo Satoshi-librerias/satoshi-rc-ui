@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FC, JSX } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ResponsiveMenuToggle } from "@presentation";
+import { ResponsiveMenuToggle } from "@components";
 
 /**
  * @description Contenedor interactivo que alterna el estado del toggle.

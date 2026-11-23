@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import { ThemeSelectorSearch } from "@presentation";
+import { ThemeSelectorSearch } from "@components";
 
 /**
  * @description Stories del campo de busqueda del selector de temas.

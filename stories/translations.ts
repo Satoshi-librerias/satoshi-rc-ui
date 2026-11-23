@@ -1,4 +1,4 @@
-import type { TranslationCatalog } from "@domain";
+import type { TranslationCatalog } from "@libs";
 
 /**
  * @description Catalogo de traducciones compartido por las stories.

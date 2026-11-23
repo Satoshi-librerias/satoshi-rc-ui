@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Skeleton } from "@presentation";
-import { useLanguage } from "@aplicacion";
+import { Skeleton } from "@components";
+import { useLanguage } from "@libs";
 
 /**
  * @description Stories del placeholder de carga reutilizable de la libreria.

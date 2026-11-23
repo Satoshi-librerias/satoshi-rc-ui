@@ -1,4 +1,5 @@
-import type { DaisyUIThemeColors, ThemeManifest, ThemeName } from "@/libs";
+import type { ThemeManifest } from "./theme-manifest.interface";
+import type { DaisyUIThemeColors, ThemeName } from "@libs/types";
 import type { ReactNode } from "react";
 
 /**

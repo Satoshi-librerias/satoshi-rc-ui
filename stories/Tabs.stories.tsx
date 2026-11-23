@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Tabs } from "@presentation";
+import { Tabs } from "@components";
 
 /**
  * @description Pestanas compartidas por las stories.

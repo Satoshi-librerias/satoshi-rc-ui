@@ -79,14 +79,14 @@ archivo no existe**. Cualquier consumidor TypeScript recibe
 
 ```
 ┌─────────────────────────────────────────────┐
-│ presentation (molecules)                    │  ✅ solo usa @aplicacion y @domain
+│ presentation (molecules)                    │  ✅ solo usa aplicacion y domain
 │   theme-selector, language-selector         │
 ├─────────────────────────────────────────────┤
 │ aplicacion (providers, hooks, services)     │  ⚠️ accede a window.localStorage
 │   theme-provider, translate-provider,       │     directamente (theme.utils) y
 │   encryption, utils                         │     exporta primitivas que usa infra
 ├─────────────────────────────────────────────┤
-│ infraestructura (storage)                   │  ❌ importa desde @aplicacion
+│ infraestructura (storage)                   │  ❌ importa desde aplicacion
 │   encrypted-preference, theme/language      │     (dependencia invertida)
 ├─────────────────────────────────────────────┤
 │ domain (types, interfaces, constants)       │  ✅ puro, sin dependencias
@@ -122,7 +122,7 @@ completo.
 | ---- | ---------- | ------------------------------------------------------------------------------------------------------ |
 | H-01 | 🔴 Crítica | `dist/index.d.ts` no existe; contrato de tipos roto                                                    |
 | H-02 | 🔴 Crítica | 0 tests en toda la librería                                                                            |
-| H-03 | 🟠 Alta    | `infraestructura` importa de `@aplicacion` (capas invertidas)                                          |
+| H-03 | 🟠 Alta    | `infraestructura` importa de `aplicacion` (capas invertidas)                                           |
 | H-04 | 🟠 Alta    | Tipos de preferencia de idioma duplicados en provider y domain                                         |
 | H-05 | 🟠 Alta    | `ThemeSelectorTriggerProps` duplicado en el mismo archivo                                              |
 | H-06 | 🟡 Media   | `theme-preference.storage.ts` muerto; tema persiste en texto plano con clave `"app_theme"` hardcodeada |

@@ -1,6 +1,6 @@
 import type { HeaderTranslations } from "../types/header.types";
 import { HEADER_DEFAULT_KEYS } from "../constants/header.constants";
-import type { ResponsiveMenuLabels } from "../../../molecules/responsive-menu/types/responsive-menu.types";
+import type { ResponsiveMenuLabels } from "@components/molecules/responsive-menu/types/responsive-menu.types";
 
 /**
  * @description Resuelve una clave de traduccion configurable del Header.

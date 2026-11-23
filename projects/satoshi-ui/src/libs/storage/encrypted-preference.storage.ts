@@ -1,4 +1,5 @@
-import { decryptText, encryptText, getLocalStorage } from "@aplicacion";
+import { decryptText, encryptText } from "@libs/services";
+import { getLocalStorage } from "@libs/utils";
 
 /**
  * @description Encrypts and saves a preference in localStorage.
@@ -12,9 +13,13 @@ import { decryptText, encryptText, getLocalStorage } from "@aplicacion";
 export async function saveEncryptedPreference(
   storageKey: string,
   value: string,
-  encryptionKey: string,
+  encryptionKey: string | undefined,
 ): Promise<void> {
-  if (value.length === 0 || encryptionKey.length === 0) {
+  if (
+    value.length === 0 ||
+    encryptionKey === undefined ||
+    encryptionKey.length === 0
+  ) {
     return;
   }
 
@@ -47,9 +52,9 @@ export async function saveEncryptedPreference(
  */
 export async function loadEncryptedPreference(
   storageKey: string,
-  encryptionKey: string,
+  encryptionKey: string | undefined,
 ): Promise<string | undefined> {
-  if (encryptionKey.length === 0) {
+  if (encryptionKey === undefined || encryptionKey.length === 0) {
     return undefined;
   }
 

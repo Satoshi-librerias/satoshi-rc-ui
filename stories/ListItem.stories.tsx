@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar, Badge, Button, ListItem } from "@presentation";
+import { Avatar, Badge, Button, ListItem } from "@components";
 
 /**
  * @description Stories de la molecula elemento de lista de la libreria.

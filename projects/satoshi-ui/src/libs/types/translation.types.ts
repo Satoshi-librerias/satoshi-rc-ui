@@ -1,5 +1,3 @@
-import type { LanguagePreferenceState } from "@domain";
-
 /**
  * @description Valores admitidos en un catalogo de traducciones.
  * @author Steveen Cues
@@ -31,12 +29,3 @@ export type TranslationCatalog = Readonly<
  * @version 1.0.0
  */
 export type TranslationParams = Readonly<Record<string, string | number>>;
-
-/**
- * @description Defines the React state dispatcher for language preference updates.
- * @author Steveen Cues
- * @version 1.0.0
- */
-export type SetLanguagePreferenceState = React.Dispatch<
-  React.SetStateAction<LanguagePreferenceState>
->;

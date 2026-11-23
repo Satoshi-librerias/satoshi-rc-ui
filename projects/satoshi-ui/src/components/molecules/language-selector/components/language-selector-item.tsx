@@ -1,5 +1,6 @@
 import type { FC, JSX } from "react";
-import { getLanguageName, type LanguageSelectorItemProps } from "@presentation";
+import { getLanguageName } from "../utils";
+import type { LanguageSelectorItemProps } from "../types";
 
 /**
  * @description Renderiza una opcion individual de idioma.

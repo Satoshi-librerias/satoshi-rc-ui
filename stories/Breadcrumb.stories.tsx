@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Breadcrumb } from "@presentation";
+import { Breadcrumb } from "@components";
 
 /**
  * @description Elementos compartidos por las stories de la ruta.

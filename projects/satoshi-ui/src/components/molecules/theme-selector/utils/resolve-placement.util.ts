@@ -1,4 +1,4 @@
-import type { ThemeSelectorPlacement } from "@presentation";
+import type { ThemeSelectorPlacement } from "../types";
 
 /**
  * @description Define los datos del contenedor para calcular la colocacion.

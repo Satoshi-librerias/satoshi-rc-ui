@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Stepper } from "@presentation";
+import { Stepper } from "@components";
 
 /**
  * @description Pasos compartidos por las stories del stepper.

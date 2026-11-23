@@ -1,8 +1,6 @@
-import {
-  CSS_THEME_TOKEN_ENTRIES,
-  type CustomThemeDefinition,
-  type ThemeColorToken,
-} from "@domain";
+import { CSS_THEME_TOKEN_ENTRIES } from "@libs/constants";
+import type { ThemeColorToken } from "@libs/types";
+import type { CustomThemeDefinition } from "@libs/interface";
 
 /**
  * @description Gestiona el registro de temas personalizados de DaisyUI.

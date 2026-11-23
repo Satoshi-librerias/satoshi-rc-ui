@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { JSX } from "react";
-import { useTheme } from "@aplicacion";
+import { useTheme } from "@libs";
 import { CUSTOM_STORY_THEME, STORY_THEMES } from "./fixtures";
 
 /**

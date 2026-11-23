@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { AccordionItem } from "@presentation";
+import { AccordionItem } from "@components";
 
 /**
  * @description Stories de la molecula elemento de acordeon de la libreria.

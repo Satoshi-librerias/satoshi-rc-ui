@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Spinner } from "@presentation";
+import { Spinner } from "@components";
 
 /**
  * @description Stories del spinner reutilizable de la libreria.

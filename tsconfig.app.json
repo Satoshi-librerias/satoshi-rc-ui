@@ -7,20 +7,18 @@
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@": ["./src/index.ts"],
-      "@/*": ["./src/*"],
-      "@aplicacion": ["./src/libs/aplicacion/index.ts"],
-      "@aplicacion/*": ["./src/libs/aplicacion/*"],
-      "@domain": ["./src/libs/domain/index.ts"],
-      "@domain/*": ["./src/libs/domain/*"],
-      "@infraestructura": ["./src/libs/infraestructura/index.ts"],
-      "@infraestructura/*": ["./src/libs/infraestructura/*"],
-      "@presentation": ["./src/libs/presentation/index.ts"],
-      "@presentation/*": ["./src/libs/presentation/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@styles/*": ["./src/libs/styles/*"]
+      "@/*": ["./projects/satoshi-ui/src/*"],
+      "@libs": ["./projects/satoshi-ui/src/libs/index.ts"],
+      "@libs/*": ["./projects/satoshi-ui/src/libs/*"],
+      "@components": ["./projects/satoshi-ui/src/components/index.ts"],
+      "@components/*": ["./projects/satoshi-ui/src/components/*"],
+      "@test/*": ["./projects/satoshi-ui/test/*"],
+      "@assets/*": ["./projects/satoshi-ui/src/assets/*"]
     }
   },
-  "include": ["src"]
+  "include": ["projects/satoshi-ui/src"]
 }

@@ -57,9 +57,9 @@ empaquetado roto y cero red de seguridad de tests.
 
 ### 🟠 Altos
 
-3. **[H-03] Violación de dependencias entre capas** —
+3. **[H-03] Violación de dependencias entre módulos** —
    `infraestructura/storage/encrypted-preference.storage.ts` importa desde
-   `@aplicacion` (crypto, storage, encoding). En una arquitectura en capas,
+   `aplicacion` (crypto, storage, encoding). En una arquitectura en capas,
    `aplicacion` debe depender de `infraestructura`, nunca al revés. Además
    `aplicacion/utils/theme.utils.ts` accede a `window.localStorage`
    directamente, duplicando la responsabilidad de `infraestructura/storage`.

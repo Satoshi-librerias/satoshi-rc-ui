@@ -1,4 +1,4 @@
-import type { ILanguageContextValue } from "@domain";
+import type { ILanguageContextValue } from "@libs/interface";
 import { createContext } from "react";
 
 /**

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Avatar } from "@presentation";
+import { Avatar } from "@components";
 
 /**
  * @description Stories del avatar reutilizable de la libreria.

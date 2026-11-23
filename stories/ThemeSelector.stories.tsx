@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ThemeSelector } from "@presentation";
+import { ThemeSelector } from "@components";
 
 /**
  * @description Stories del selector de temas de la libreria.

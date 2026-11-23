@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import { ThemeSelectorOption } from "@presentation";
+import { ThemeSelectorOption } from "@components";
 import { STORY_THEMES } from "./fixtures";
 
 /**

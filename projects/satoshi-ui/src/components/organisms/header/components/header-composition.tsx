@@ -1,5 +1,5 @@
 import type { FC, JSX } from "react";
-import { Container } from "@presentation";
+import { Container } from "@components/atoms";
 import { getHeaderSurfaceClasses } from "../utils/get-header-surface-classes.util";
 import type {
   HeaderActionsProps,

@@ -1,6 +1,6 @@
 import { memo, useId } from "react";
 import type { FC, JSX } from "react";
-import { Input } from "@presentation";
+import { Input } from "@components/atoms";
 import { getInputGroupWrapperClasses } from "../utils/get-input-group-classes.util";
 import {
   INPUT_GROUP_JOIN_CLASS,

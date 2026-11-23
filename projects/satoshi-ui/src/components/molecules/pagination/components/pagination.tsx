@@ -1,6 +1,6 @@
 import { memo, useCallback } from "react";
 import type { FC, JSX } from "react";
-import { useLanguage } from "@aplicacion";
+import { useLanguage } from "@libs";
 import {
   getPaginationClasses,
   getPaginationPageClasses,

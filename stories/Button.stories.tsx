@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import { Button } from "@presentation";
+import { Button } from "@components";
 
 /**
  * @description Stories del boton reutilizable de la libreria.

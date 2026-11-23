@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Navigation, ResponsiveMenuPanel } from "@presentation";
+import { Navigation, ResponsiveMenuPanel } from "@components";
 
 /**
  * @description Elementos de navegacion compartidos por las stories.

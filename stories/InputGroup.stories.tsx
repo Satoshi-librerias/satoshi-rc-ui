@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button, InputGroup } from "@presentation";
+import { Button, InputGroup } from "@components";
 
 /**
  * @description Stories de la molecula grupo de entrada de la libreria.

@@ -1,6 +1,6 @@
 import { cloneElement, isValidElement, useCallback } from "react";
 import type { FC, JSX, MouseEvent as ReactMouseEvent } from "react";
-import { useLanguage } from "@aplicacion";
+import { useLanguage } from "@libs";
 import { ResponsiveMenuPanel } from "./responsive-menu-panel";
 import { ResponsiveMenuToggle } from "./responsive-menu-toggle";
 import { useResponsiveMenu } from "../hooks/use-responsive-menu.hook";

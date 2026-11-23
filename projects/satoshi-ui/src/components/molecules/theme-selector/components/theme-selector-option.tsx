@@ -1,7 +1,7 @@
 import type { FC, JSX } from "react";
 
-import { useLanguage } from "@aplicacion";
-import { type ThemeSelectorOptionProps } from "@presentation";
+import { useLanguage } from "@libs";
+import { type ThemeSelectorOptionProps } from "../types";
 
 /**
  * @description Representa una opcion individual del selector de temas.

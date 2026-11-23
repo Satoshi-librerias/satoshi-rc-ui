@@ -7,10 +7,15 @@
     "emitDeclarationOnly": true,
     "declarationMap": false,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./projects/satoshi-ui/src",
     "composite": false,
     "incremental": false
   },
-  "include": ["src"],
-  "exclude": ["dist", "node_modules", "src/test"]
+  "include": ["projects/satoshi-ui/src"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "projects/satoshi-ui/src/test",
+    "**/*.test.*"
+  ]
 }

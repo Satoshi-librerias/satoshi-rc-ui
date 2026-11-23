@@ -1,16 +1,15 @@
 import type { FC, JSX, MouseEvent } from "react";
+import { Container } from "@components/atoms";
+import { Logo } from "@components/atoms";
 import {
-  Container,
-  Logo,
   ResponsiveMenuToggle,
   ResponsiveMenuPanel,
-  type HeaderLogoConfig,
-} from "@presentation";
+} from "@components/molecules";
 import { HeaderSelectors } from "./header-selectors";
 import { getHeaderSurfaceClasses } from "../utils/get-header-surface-classes.util";
-import { useResponsiveMenu } from "../../../molecules/responsive-menu/hooks/use-responsive-menu.hook";
+import { useResponsiveMenu } from "@components/molecules/responsive-menu/hooks/use-responsive-menu.hook";
 import { useHeaderNavigation } from "../hooks/use-header-navigation.hook";
-import type { HeaderProps } from "../types/header.types";
+import type { HeaderLogoConfig, HeaderProps } from "../types/header.types";
 import type {
   HeaderLogoPosition,
   HeaderMobileSelectors,

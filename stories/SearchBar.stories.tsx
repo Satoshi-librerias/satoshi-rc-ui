@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { SearchBar } from "@presentation";
+import { SearchBar } from "@components";
 import { useState } from "react";
 
 /**

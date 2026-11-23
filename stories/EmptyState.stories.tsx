@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { EmptyState } from "@presentation";
-import { Button } from "@presentation";
+import { EmptyState } from "@components";
+import { Button } from "@components";
 
 /**
  * @description Stories de la molecula estado vacio de la libreria.

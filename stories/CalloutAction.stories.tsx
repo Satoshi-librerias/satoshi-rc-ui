@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { CalloutAction } from "@presentation";
+import { CalloutAction } from "@components";
 
 /**
  * @description Stories de la molecula aviso con accion de la libreria.

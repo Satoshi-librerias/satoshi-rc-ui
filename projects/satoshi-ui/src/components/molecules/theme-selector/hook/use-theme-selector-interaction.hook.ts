@@ -2,12 +2,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { closeThemeSelector } from "../utils/close-theme-selector.util";
 import { DEFAULT_PLACEMENT } from "../constants/theme-selector.constants";
-import {
-  resolveThemeSelectorPlacement,
-  type UseThemeSelectorInteractionProps,
-  type UseThemeSelectorInteractionReturn,
-  type ThemeSelectorPlacement,
-} from "@presentation";
+import { resolveThemeSelectorPlacement } from "../utils/resolve-placement.util";
+import type {
+  ThemeSelectorPlacement,
+  UseThemeSelectorInteractionProps,
+  UseThemeSelectorInteractionReturn,
+} from "../types";
 
 /**
  * @description Gestiona las interacciones y el ciclo de vida del selector.

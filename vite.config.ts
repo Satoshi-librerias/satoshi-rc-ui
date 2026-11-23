@@ -4,62 +4,69 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import dts from "unplugin-dts/vite";
 
-const SRC_DIRECTORY = fileURLToPath(new URL("./src", import.meta.url));
-const LIBS_DIRECTORY = fileURLToPath(new URL("./src/libs/", import.meta.url));
+const PROJECT_DIRECTORY = fileURLToPath(
+  new URL("./projects/satoshi-ui/src", import.meta.url),
+);
+const LIBS_DIRECTORY = fileURLToPath(
+  new URL("./projects/satoshi-ui/src/libs/", import.meta.url),
+);
 const OUTPUT_DIRECTORY = fileURLToPath(new URL("./dist", import.meta.url));
 const TYPESCRIPT_CONFIG = fileURLToPath(
   new URL("./tsconfig.types.json", import.meta.url),
 );
 
+/**
+ * @description Alias de la libreria: @libs para codigo transversal,
+ * @components para la UI, @test para recursos de pruebas.
+ * @author Steveen Cues
+ * @version 3.0.0
+ */
+const TEST_DIRECTORY = fileURLToPath(
+  new URL("./projects/satoshi-ui/test", import.meta.url),
+);
+
 const ALIASES = [
   {
-    find: /^@presentation$/,
-    replacement: `${LIBS_DIRECTORY}presentation/index.ts`,
+    find: /^@libs$/,
+    replacement: `${LIBS_DIRECTORY}index.ts`,
   },
   {
-    find: /^@presentation\//,
-    replacement: `${LIBS_DIRECTORY}presentation/`,
+    find: /^@libs\//,
+    replacement: LIBS_DIRECTORY,
   },
   {
-    find: /^@aplicacion$/,
-    replacement: `${LIBS_DIRECTORY}aplicacion/index.ts`,
+    find: /^@components$/,
+    replacement: `${PROJECT_DIRECTORY}/components/index.ts`,
   },
   {
-    find: /^@aplicacion\//,
-    replacement: `${LIBS_DIRECTORY}aplicacion/`,
+    find: /^@components\//,
+    replacement: `${PROJECT_DIRECTORY}/components/`,
   },
   {
-    find: /^@domain$/,
-    replacement: `${LIBS_DIRECTORY}domain/index.ts`,
-  },
-  {
-    find: /^@domain\//,
-    replacement: `${LIBS_DIRECTORY}domain/`,
-  },
-  {
-    find: /^@infraestructura$/,
-    replacement: `${LIBS_DIRECTORY}infraestructura/index.ts`,
-  },
-  {
-    find: /^@infraestructura\//,
-    replacement: `${LIBS_DIRECTORY}infraestructura/`,
+    find: /^@test\//,
+    replacement: `${TEST_DIRECTORY}/`,
   },
   {
     find: /^@assets\//,
-    replacement: `${SRC_DIRECTORY}assets/`,
+    replacement: `${PROJECT_DIRECTORY}/assets/`,
   },
   {
     find: /^@\//,
-    replacement: SRC_DIRECTORY,
+    replacement: PROJECT_DIRECTORY,
   },
 ];
 
+/**
+ * @description Configuracion de compilacion de la libreria React.
+ * @author Steveen Cues
+ * @version 2.0.0
+ */
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
     dts({
-      entryRoot: SRC_DIRECTORY,
+      entryRoot: PROJECT_DIRECTORY,
       outDirs: [OUTPUT_DIRECTORY],
       tsconfigPath: TYPESCRIPT_CONFIG,
       insertTypesEntry: true,
@@ -71,7 +78,9 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: fileURLToPath(new URL("./src/index.ts", import.meta.url)),
+      entry: fileURLToPath(
+        new URL("./projects/satoshi-ui/src/index.ts", import.meta.url),
+      ),
       name: "ReactUI",
       formats: ["es", "cjs"],
       fileName: (format): string =>

@@ -1,7 +1,5 @@
-import {
-  LANGUAGE_SEARCH_PLACEHOLDER,
-  type LanguageSelectorSearchProps,
-} from "@presentation";
+import { LANGUAGE_SEARCH_PLACEHOLDER } from "../constants";
+import type { LanguageSelectorSearchProps } from "../types";
 import type { ChangeEvent, FC, JSX } from "react";
 
 /**

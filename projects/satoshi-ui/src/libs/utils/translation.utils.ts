@@ -1,11 +1,11 @@
-import {
-  type TranslationCatalog,
-  type TranslationDictionary,
-  type TranslationParams,
-  type TranslationValue,
-  GLOBAL_REGEX_FLAG,
-  TranslationRegex,
-} from "@domain";
+import { GLOBAL_REGEX_FLAG } from "@libs/constants";
+import { TranslationRegex } from "@libs/enums";
+import type {
+  TranslationCatalog,
+  TranslationDictionary,
+  TranslationParams,
+  TranslationValue,
+} from "@libs/types";
 
 /**
  * @description Comprueba si un idioma existe en el catalogo.

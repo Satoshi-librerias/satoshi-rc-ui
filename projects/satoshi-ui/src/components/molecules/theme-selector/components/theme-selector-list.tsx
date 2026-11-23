@@ -1,8 +1,6 @@
 import type { FC, JSX } from "react";
-import {
-  type ThemeSelectorListProps,
-  ThemeSelectorOption,
-} from "@presentation";
+import { ThemeSelectorOption } from "./theme-selector-option";
+import type { ThemeSelectorListProps } from "../types";
 
 /**
  * @description Renderiza la lista desplazable de temas disponibles.

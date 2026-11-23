@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DropdownItem } from "@presentation";
+import { DropdownItem } from "@components";
 
 /**
  * @description Stories del atomo elemento de menu de la libreria.

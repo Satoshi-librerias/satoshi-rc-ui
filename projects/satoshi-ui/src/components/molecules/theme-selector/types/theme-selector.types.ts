@@ -1,4 +1,4 @@
-import type { AppTheme } from "@domain";
+import type { AppTheme } from "@libs";
 import type { RefObject } from "react";
 
 /**

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Input } from "@presentation";
+import { Input } from "@components";
 
 /**
  * @description Stories del campo de texto reutilizable de la libreria.

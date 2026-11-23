@@ -6,15 +6,14 @@ import {
   RAW_KEY_FORMAT,
   SHA_256_ALGORITHM,
   STORAGE_VALUE_SEPARATOR,
-} from "@domain";
-
+} from "@libs/constants";
 import {
   decodeBase64,
   encodeBase64,
   getCryptoApi,
   decodeText,
   encodeText,
-} from "@aplicacion";
+} from "@libs/utils";
 
 /**
  * @description Represents validated encrypted data.

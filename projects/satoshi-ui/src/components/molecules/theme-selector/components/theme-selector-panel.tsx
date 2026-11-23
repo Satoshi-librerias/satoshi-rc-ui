@@ -1,9 +1,7 @@
 import type { FC, JSX } from "react";
-import {
-  ThemeSelectorList,
-  type ThemeSelectorPanelProps,
-  ThemeSelectorSearch,
-} from "@presentation";
+import { ThemeSelectorList } from "./theme-selector-list";
+import { ThemeSelectorSearch } from "./theme-selector-search";
+import type { ThemeSelectorPanelProps } from "../types";
 
 /**
  * @description Renderiza el panel desplegable para seleccionar temas.
