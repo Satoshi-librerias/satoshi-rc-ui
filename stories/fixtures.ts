@@ -1,4 +1,4 @@
-import type { AppTheme, CustomThemeDefinition } from "@domain";
+import type { AppTheme, CustomThemeDefinition } from "@libs";
 import { STORY_TRANSLATIONS } from "./translations";
 
 /**

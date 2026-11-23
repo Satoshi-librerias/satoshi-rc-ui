@@ -1,5 +1,5 @@
-import { TranslateContext } from "@aplicacion";
-import type { ILanguageContextValue } from "@domain";
+import { TranslateContext } from "@libs/contexts";
+import type { ILanguageContextValue } from "@libs/interface";
 import { useContext } from "react";
 
 /**

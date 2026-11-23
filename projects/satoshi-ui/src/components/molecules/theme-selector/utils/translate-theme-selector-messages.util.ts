@@ -1,7 +1,7 @@
 import type {
   ThemeSelectorMessages,
   ThemeSelectorTranslations,
-} from "@presentation";
+} from "../types";
 
 /**
  * @description Resuelve una clave de traduccion configurable.

@@ -1,4 +1,4 @@
-import type { AppTheme } from "@domain";
+import type { AppTheme } from "@libs";
 
 /**
  * @description Coloca el tema seleccionado primero sin eliminar ni duplicar temas.

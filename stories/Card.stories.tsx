@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Card } from "@presentation";
+import { Card } from "@components";
 
 /**
  * @description Stories de la tarjeta reutilizable de la libreria.

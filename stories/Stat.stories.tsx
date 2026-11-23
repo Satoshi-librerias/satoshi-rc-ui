@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Stat } from "@presentation";
+import { Stat } from "@components";
 
 /**
  * @description Stories de la molecula estadistica de la libreria.

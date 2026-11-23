@@ -1,4 +1,5 @@
-import type { AppTheme, ThemeName } from "@domain";
+import type { AppTheme } from "@libs/interface";
+import type { ThemeName } from "@libs/types";
 
 import {
   loadEncryptedPreference,

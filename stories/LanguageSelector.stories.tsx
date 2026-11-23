@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { LanguageSelector } from "@presentation";
+import { LanguageSelector } from "@components";
 
 /**
  * @description Stories del selector de idiomas de la libreria.

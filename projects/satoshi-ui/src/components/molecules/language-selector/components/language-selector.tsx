@@ -1,12 +1,9 @@
 import { useRef, type FC, type JSX } from "react";
-import {
-  LanguageSelectorList,
-  type LanguageSelectorProps,
-  LanguageSelectorSearch,
-  LanguageSelectorTrigger,
-  useLanguageSelector,
-  useLanguageSelectorEvents,
-} from "@presentation";
+import { LanguageSelectorList } from "./language-selector-list";
+import { LanguageSelectorSearch } from "./language-selector-search";
+import { LanguageSelectorTrigger } from "./language-selector-trigger";
+import { useLanguageSelector, useLanguageSelectorEvents } from "../hooks";
+import type { LanguageSelectorProps } from "../types";
 
 /**
  * @description Permite buscar y seleccionar idiomas disponibles.

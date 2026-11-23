@@ -1,7 +1,5 @@
-import {
-  getLanguageName,
-  type LanguageSelectorTriggerProps,
-} from "@presentation";
+import { getLanguageName } from "../utils";
+import type { LanguageSelectorTriggerProps } from "../types";
 import type { FC, JSX } from "react";
 
 /**

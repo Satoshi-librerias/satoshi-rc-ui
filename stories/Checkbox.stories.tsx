@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Checkbox } from "@presentation";
+import { Checkbox } from "@components";
 
 /**
  * @description Stories del checkbox reutilizable de la libreria.

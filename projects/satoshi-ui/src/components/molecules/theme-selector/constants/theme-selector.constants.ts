@@ -1,4 +1,4 @@
-import type { ThemeSelectorPlacement } from "@presentation";
+import type { ThemeSelectorPlacement } from "../types";
 
 /**
  * @description Define el umbral minimo de temas para mostrar el campo de busqueda.

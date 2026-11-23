@@ -1,6 +1,6 @@
 import { memo } from "react";
 import type { FC, JSX } from "react";
-import { Button } from "@presentation";
+import { Button } from "@components/atoms";
 import { getCalloutActionClasses } from "../utils/get-callout-action-classes.util";
 import {
   CALLOUT_ACTION_MESSAGE_CLASS,

@@ -1,19 +1,19 @@
 import { useCallback, useEffect, useMemo, useState, type FC } from "react";
+import { ThemeContext } from "@libs/contexts";
+import { customThemeService } from "@libs/services";
+import {
+  applyThemeToDocument,
+  findThemeByName,
+  isCustomThemeDefinition,
+  persistTheme,
+  resolveInitialTheme,
+} from "@libs/utils";
 import type {
   AppTheme,
   CustomThemeDefinition,
   ThemeContextValue,
   ThemeProviderProps,
-} from "@domain";
-import {
-  applyThemeToDocument,
-  customThemeService,
-  findThemeByName,
-  isCustomThemeDefinition,
-  persistTheme,
-  resolveInitialTheme,
-  ThemeContext,
-} from "@aplicacion";
+} from "@libs/interface";
 
 /**
  * @description Resuelve el tema activo o selecciona el primer tema disponible.

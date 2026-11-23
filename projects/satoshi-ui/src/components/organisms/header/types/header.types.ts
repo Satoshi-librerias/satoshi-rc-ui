@@ -1,4 +1,4 @@
-import type { NavigationItem } from "../../../molecules/navigation/types/navigation.types";
+import type { NavigationItem } from "@components/molecules/navigation/types/navigation.types";
 import type {
   HeaderLayoutConfig,
   HeaderPosition,

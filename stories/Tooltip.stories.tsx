@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button, Tooltip } from "@presentation";
+import { Button, Tooltip } from "@components";
 
 /**
  * @description Stories del tooltip reutilizable de la libreria.

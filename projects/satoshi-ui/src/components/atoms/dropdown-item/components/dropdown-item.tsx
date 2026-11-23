@@ -1,6 +1,6 @@
 import { memo, useCallback } from "react";
 import type { FC, JSX } from "react";
-import { Kbd } from "@presentation";
+import { Kbd } from "@components/atoms/kbd";
 import { getDropdownItemClasses } from "../utils/get-dropdown-item-classes.util";
 import type { DropdownItemProps } from "../types/dropdown-item.types";
 

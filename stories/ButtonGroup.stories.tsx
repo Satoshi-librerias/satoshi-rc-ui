@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ButtonGroup } from "@presentation";
+import { ButtonGroup } from "@components";
 import { useState } from "react";
 
 /**

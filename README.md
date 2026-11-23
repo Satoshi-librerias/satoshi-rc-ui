@@ -119,20 +119,22 @@ Para desarrollo en tiempo real con un proyecto consumidor, consulta la seccion
 
 ## 📦 Scripts disponibles
 
-| Comando                 | Descripción                                                       |
-| ----------------------- | ----------------------------------------------------------------- |
-| `npm run storybook`     | Inicia Storybook para explorar los componentes.                   |
-| `npm run dev:lib`       | Compila la librería en modo watch para desarrollo con `npm link`. |
-| `npm run link:consumer` | Registra la librería globalmente (`npm link`) para desarrollo.    |
-| `npm run build`         | Compila la aplicación o librería según la configuración de Vite.  |
-| `npm run lint`          | Ejecuta ESLint para validar el código.                            |
-| `npm run format`        | Formatea los archivos con Prettier.                               |
-| `npm run format:check`  | Comprueba el formato sin modificar archivos.                      |
-| `npm run package:lib`   | Ejecuta el proceso de empaquetado de la librería.                 |
-| `npm run prepare`       | Inicializa los Git Hooks configurados.                            |
-
-Los comandos disponibles dependen de los scripts definidos en `package.json`.
-Ajusta esta tabla según la configuración real del proyecto.
+| Comando                   | Descripción                                                       |
+| ------------------------- | ----------------------------------------------------------------- |
+| `npm test`                | Ejecuta las pruebas unitarias (Vitest, jsdom).                    |
+| `npm run test:watch`      | Pruebas en modo watch.                                            |
+| `npm run test:coverage`   | Pruebas con cobertura.                                            |
+| `npm run lint`            | Ejecuta ESLint para validar el código.                            |
+| `npm run format`          | Formatea los archivos con Prettier.                               |
+| `npm run format:check`    | Comprueba el formato sin modificar archivos.                      |
+| `npm run build:lib`       | Compila la librería (tsc + Vite) hacia `dist/`.                   |
+| `npm run build`           | Validación completa: lint + format + build + empaquetado.         |
+| `npm run package:lib`     | Empaqueta la librería en `.tgz` dentro de `resources/`.           |
+| `npm run dev:lib`         | Compila la librería en modo watch para desarrollo con `npm link`. |
+| `npm run link:consumer`   | Registra la librería globalmente (`npm link`) para desarrollo.    |
+| `npm run storybook`       | Inicia Storybook (puerto 6006).                                   |
+| `npm run build:storybook` | Compila Storybook hacia `docs/storybook`.                         |
+| `npm run prepare`         | Inicializa los Git Hooks configurados.                            |
 
 En el proyecto consumidor (`starter-scaffolding-react-web`) están disponibles:
 
@@ -203,10 +205,10 @@ Y en otra terminal, el servidor del proyecto consumidor:
 npm run dev
 ```
 
-Cada cambio en `src/` de la librería regenera `dist/` (JavaScript ESM y CJS,
-declaraciones `.d.ts` y `style.css`) en unos segundos; al recargar el navegador
-del consumidor se ven los cambios. Los cambios de tipos pueden requerir
-reiniciar el TS server del editor.
+Cada cambio en `projects/satoshi-ui/src/` regenera `dist/` (JavaScript ESM y
+CJS, declaraciones `.d.ts` y `style.css`) en unos segundos; al recargar el
+navegador del consumidor se ven los cambios. Los cambios de tipos pueden
+requerir reiniciar el TS server del editor.
 
 ### 4. Volver al modo producción
 
@@ -474,33 +476,51 @@ Para distribuir la librería de forma privada:
 
 ## 📁 Estructura del proyecto
 
+La libreria React vive en `projects/satoshi-ui/src` con dos raices:
+`components/` (UI) y `libs/` (transversal). Los alias oficiales son
+`@components`, `@libs` y `@test`.
+
 ```text
 satoshi-rc-ui/
 ├── .github/
+│   ├── skills/             # react-library-architecture, ops-lifecycle, QA
 │   ├── tools/              # validador del kit de personalizacion
-│   ├── skills/             # skill ops-lifecycle
 │   └── workflows/          # flujos de CI
-├── scripts/
-│   └── package-library.mjs # empaquetado de la libreria
-├── src/
-│   ├── assets/             # recursos estaticos
-│   ├── libs/
-│   │   ├── aplicacion/     # contexts, hooks, providers, services, utils
-│   │   ├── domain/         # constants, enums, interface, types
-│   │   ├── infraestructura/# storage
-│   │   ├── presentation/   # atoms, molecules, organisms
-│   │   ├── styles/
-│   │   └── index.ts
-│   ├── test/               # setup y utilidades de prueba
-│   └── index.ts            # punto de entrada
+├── projects/
+│   └── satoshi-ui/
+│       └── src/
+│           ├── components/     # UI React
+│           │   ├── atoms/      #   <nombre>/{components,types,constants,utils}
+│           │   ├── molecules/
+│           │   └── organisms/
+│           ├── libs/           # transversal sin JSX de UI
+│           │   ├── constants/  contexts/   enums/     hooks/
+│           │   ├── interface/  providers/  services/  storage/
+│           │   ├── types/      utils/      styles/    (Tailwind + DaisyUI)
+│           │   └── index.ts          # barril publico de libs
+│           ├── test/           # pruebas unitarias centralizadas (Vitest)
+│           └── index.ts        # punto de entrada publico
 ├── stories/                # historias de Storybook
+├── scripts/                # empaquetado de la libreria
 ├── resources/              # paquetes .tgz generados
-├── commitlint.config.cjs
 ├── eslint.config.js
-├── vite.config.ts
-├── vitest.config.ts
+├── vite.config.ts          # build de la libreria + aliases
+├── vitest.config.ts        # pruebas + aliases
 └── package.json
 ```
+
+### Reglas de arquitectura
+
+- Direccion de dependencias: `components -> libs`; `libs` nunca importa de
+  `components`.
+- Cada componente y cada modulo de `libs` exporta su API publica por su
+  `index.ts`; la API del paquete es unicamente
+  `projects/satoshi-ui/src/index.ts`.
+- Los alias oficiales (`@libs`, `@components`, `@test/*`, `@assets/*`, `@/*`) se
+  registran en `tsconfig.app.json`, `vite.config.ts`, `vitest.config.ts` y
+  `.storybook/main.ts`; mantenlos sincronizados.
+- Las pruebas viven en `projects/satoshi-ui/test` (centralizadas) con el setup
+  global en `projects/satoshi-ui/test/setup/setup.ts`.
 
 ## 🤝 Guía de contribución
 

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { ThemeContextValue } from "@domain";
+import type { ThemeContextValue } from "@libs/interface";
 
 /**
  * @description Contexto compartido para gestionar los temas de la aplicacion.

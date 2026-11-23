@@ -16,7 +16,7 @@ const LANGUAGE_PREFERENCE_STORAGE_KEY =
  */
 export function saveLanguagePreference(
   language: string,
-  encryptionKey: string,
+  encryptionKey: string | undefined,
 ): Promise<void> {
   return saveEncryptedPreference(
     LANGUAGE_PREFERENCE_STORAGE_KEY,
@@ -35,7 +35,7 @@ export function saveLanguagePreference(
  */
 export async function loadLanguagePreference(
   availableLanguages: readonly string[],
-  encryptionKey: string,
+  encryptionKey: string | undefined,
 ): Promise<string | undefined> {
   const savedLanguage = await loadEncryptedPreference(
     LANGUAGE_PREFERENCE_STORAGE_KEY,

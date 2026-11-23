@@ -1,4 +1,4 @@
-import type { AppTheme } from "@domain";
+import type { AppTheme } from "@libs";
 
 /**
  * @description Filtra los temas por nombre o descripcion traducidos.

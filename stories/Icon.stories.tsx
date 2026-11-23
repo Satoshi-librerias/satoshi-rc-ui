@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Icon } from "@presentation";
+import { Icon } from "@components";
 
 /**
  * @description Stories del icono basado en el sprite de la libreria.

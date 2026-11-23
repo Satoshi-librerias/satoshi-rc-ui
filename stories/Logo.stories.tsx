@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Logo } from "@presentation";
+import { Logo } from "@components";
 
 /**
  * @description Stories del logo reutilizable de la libreria.

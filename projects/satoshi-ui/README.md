@@ -1,74 +1,75 @@
-# SatoshiRcUi
+# satoshi-ui
 
-This project was generated using
-[Angular CLI](https://github.com/angular/angular-cli) version 22.3.0.
+Libreria React de componentes reutilizables (atoms, molecules, organisms) con
+Tailwind CSS 4, DaisyUI, gestion de temas e internacionalizacion. Este paquete
+es el codigo fuente que compila el `vite.config.ts` de la raiz del repositorio.
 
-## Code scaffolding
+## Estructura
 
-Angular CLI includes powerful code scaffolding tools. To generate a new
-component, run:
-
-```bash
-ng generate component component-name
+```text
+projects/satoshi-ui/
+├── src/
+│   ├── components/         # UI React
+│   │   ├── atoms/          #   <nombre>/{components,types,constants,utils,index.ts}
+│   │   ├── molecules/
+│   │   ├── organisms/
+│   │   └── index.ts        # barril: atoms + molecules + organisms
+│   ├── libs/               # transversal, sin JSX de UI
+│   │   ├── constants/      contexts/   enums/     hooks/
+│   │   ├── interface/      providers/  services/  storage/
+│   │   ├── types/          utils/      styles/    (Tailwind + DaisyUI)
+│   │   └── index.ts        # barril publico de libs
+│   └── index.ts            # API publica del paquete
+├── test/                   # pruebas unitarias centralizadas (jsdom + Testing Library)
+│   ├── components/         # espeja src/components
+│   ├── libs/               # espeja src/libs
+│   └── setup/              # setup.ts: setup global de Vitest
+└── README.md
 ```
 
-For a complete list of available schematics (such as `components`, `directives`,
-or `pipes`), run:
+## Alias
+
+| Alias                          | Resuelve a          | Declarado en                                                                    |
+| ------------------------------ | ------------------- | ------------------------------------------------------------------------------- |
+| `@components`, `@components/*` | `src/components`    | `tsconfig.app.json`, `vite.config.ts`, `vitest.config.ts`, `.storybook/main.ts` |
+| `@libs`, `@libs/*`             | `src/libs`          | `tsconfig.app.json`, `vite.config.ts`, `vitest.config.ts`, `.storybook/main.ts` |
+| `@test/*`                      | `test/`             | `tsconfig.app.json`, `vite.config.ts`, `vitest.config.ts`, `.storybook/main.ts` |
+| `@assets/*`, `@/*`             | `src/assets`, `src` | `tsconfig.app.json`, `vite.config.ts`, `vitest.config.ts`, `.storybook/main.ts` |
+
+`tsconfig.test.json` extiende `tsconfig.app.json` e incluye `test/` para que
+TypeScript y el IDE resuelvan los alias en las pruebas; esta referenciado desde
+el `tsconfig.json` raiz.
+
+## Reglas
+
+1. Direccion de dependencias: `components -> libs`; `libs` nunca importa de
+   `components`.
+2. Cada carpeta exporta su API publica por su `index.ts`; la API del paquete es
+   unicamente `src/index.ts`.
+3. Los alias oficiales son `@libs`, `@components`, `@test/*`, `@assets/*` y
+   `@/*`; mantenlos sincronizados en los cuatro entornos de la tabla anterior.
+4. Un solo import por alias: los valores y los tipos (`type`) van juntos en la
+   misma importacion de `@libs` o `@components`, nunca en imports separados del
+   mismo alias ni mezclando `@libs` con `@libs/<modulo>` en el mismo archivo.
+5. Los modulos internos de `libs` se importan entre si con `@libs/<modulo>` (por
+   ejemplo `@libs/contexts`, `@libs/interface`), nunca con `../`. Los imports
+   relativos solo se permiten dentro de la misma carpeta de modulo (por ejemplo
+   `./theme-manifest.interface` en `libs/interface`).
+6. Pruebas centralizadas en `test/` (espejando `src/`) con el setup de
+   `test/setup/setup.ts`; importan el codigo bajo prueba desde `@libs` /
+   `@components` y los recursos de testing desde `@test/*`.
+7. TypeScript estricto, sin `any`; JSDoc en espanol sin caracteres especiales.
+
+## Comandos (desde la raiz del repositorio)
 
 ```bash
-ng generate --help
+npm test                 # pruebas unitarias
+npm run lint             # ESLint
+npm run format:check     # Prettier
+npm run build:lib        # compilacion de la libreria hacia dist/
+npm run storybook        # Storybook en desarrollo (puerto 6006)
+npm run build:storybook  # compilacion de Storybook
 ```
 
-## Building
-
-To build the library, run:
-
-```bash
-ng build satoshi-rc-ui
-```
-
-This command will compile your project, and the build artifacts will be placed
-in the `dist/` directory.
-
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these
-steps:
-
-1. Navigate to the `dist` directory:
-
-   ```bash
-   cd dist/satoshi-rc-ui
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use
-the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You
-can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command
-references, visit the
-[Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
-page.
+Consulta el README de la raiz para la guia completa de instalacion, temas,
+internacionalizacion y empaquetado.

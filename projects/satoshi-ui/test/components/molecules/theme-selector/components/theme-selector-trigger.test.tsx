@@ -2,11 +2,11 @@ import "@testing-library/jest-dom/vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-import type { AppTheme } from "@domain";
+import type { AppTheme } from "@libs";
 
-import { ThemeSelectorTrigger } from "./theme-selector-trigger";
+import { ThemeSelectorTrigger } from "@components/molecules/theme-selector/components/theme-selector-trigger";
 
-vi.mock("@aplicacion", () => ({
+vi.mock("@libs", () => ({
   useLanguage: () => ({
     t: (key: string) => (key === "themes.light.name" ? "Light" : key),
   }),

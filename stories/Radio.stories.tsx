@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Radio } from "@presentation";
-import { useLanguage } from "@aplicacion";
+import { Radio } from "@components";
+import { useLanguage } from "@libs";
 
 /**
  * @description Stories del boton de opcion reutilizable de la libreria.

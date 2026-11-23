@@ -7,7 +7,7 @@ import {
   Logo,
   Navigation,
   ThemeSelector,
-} from "@presentation";
+} from "@components";
 
 /**
  * @description Elementos de navegacion compartidos por las stories.

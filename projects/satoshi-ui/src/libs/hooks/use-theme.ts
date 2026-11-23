@@ -1,6 +1,6 @@
-import { ThemeContext } from "@aplicacion";
+import { ThemeContext } from "@libs/contexts";
 import { useContext } from "react";
-import type { ThemeContextValue } from "@domain";
+import type { ThemeContextValue } from "@libs/interface";
 
 /**
  * @description Permite consultar y modificar el tema activo.

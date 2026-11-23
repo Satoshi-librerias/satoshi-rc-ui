@@ -1,4 +1,4 @@
-import type { AppTheme, CustomThemeDefinition } from "@domain";
+import type { AppTheme, CustomThemeDefinition } from "@libs/interface";
 
 /**
  * @description Busca un tema por su nombre dentro de una coleccion.

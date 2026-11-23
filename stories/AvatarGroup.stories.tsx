@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { AvatarGroup } from "@presentation";
+import { AvatarGroup } from "@components";
 
 /**
  * @description Miembros compartidos por las stories del grupo de avatares.

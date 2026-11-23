@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button, SearchBar, Toolbar } from "@presentation";
+import { Button, SearchBar, Toolbar } from "@components";
 
 /**
  * @description Stories de la molecula barra de herramientas de la libreria.

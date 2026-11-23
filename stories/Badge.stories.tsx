@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Badge } from "@presentation";
+import { Badge } from "@components";
 
 /**
  * @description Stories del badge reutilizable de la libreria.

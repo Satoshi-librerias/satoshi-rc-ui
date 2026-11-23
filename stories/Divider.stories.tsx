@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Divider } from "@presentation";
+import { Divider } from "@components";
 
 /**
  * @description Stories del separador reutilizable de la libreria.

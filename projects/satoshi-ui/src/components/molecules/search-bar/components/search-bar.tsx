@@ -1,6 +1,6 @@
 import { memo, useCallback } from "react";
 import type { FC, JSX, SyntheticEvent } from "react";
-import { Input } from "@presentation";
+import { Input } from "@components/atoms";
 import { getSearchBarClasses } from "../utils/get-search-bar-classes.util";
 import {
   SEARCH_BAR_ICON_CLASS,

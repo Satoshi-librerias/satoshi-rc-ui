@@ -29,10 +29,14 @@ keyboard and pointer input, and mobile, tablet, and desktop layouts.
    content.
 6. Make progress indicators both visual and semantic. Keep the current step,
    range, and accessible label synchronized with the rendered progress amount.
-7. Add tests for initial state, each main action, state persistence, reopening,
-   keyboard/accessibility semantics, progress changes, and restoration of any
-   DOM styles touched by an overlay. Avoid tests that only assert class strings
-   when behavior or accessible output can be asserted.
+7. Add tests in the centralized test folder
+   (`projects/satoshi-ui/test/components/<level>/<name>/*.test.tsx`, mirroring
+   the source layout) for initial state, each main action, state persistence,
+   reopening, keyboard/accessibility semantics, progress changes, and
+   restoration of any DOM styles touched by an overlay. Import the component
+   with `@components/*`, libs with `@libs`, and testing resources with
+   `@test/*`. Avoid tests that only assert class strings when behavior or
+   accessible output can be asserted.
 8. For visible localized labels, verify the keys exist in each consumer locale
    and that translated output is not a raw key. Remove invalid key references
    rather than shipping missing labels; remove stale catalog keys only after

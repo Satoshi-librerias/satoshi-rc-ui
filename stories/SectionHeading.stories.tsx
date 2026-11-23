@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { SectionHeading } from "@presentation";
-import { Button } from "@presentation";
+import { SectionHeading } from "@components";
+import { Button } from "@components";
 
 /**
  * @description Stories de la molecula encabezado de seccion de la libreria.

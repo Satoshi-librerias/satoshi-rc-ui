@@ -1,4 +1,4 @@
-import type { ThemeName } from "@domain";
+import type { ThemeName } from "@libs/types";
 
 /**
  * @description Define las propiedades basicas de un manifiesto de tema.

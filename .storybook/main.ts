@@ -2,49 +2,43 @@ import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/react-vite";
 
-const SRC_DIRECTORY = fileURLToPath(new URL("../src/", import.meta.url));
-const LIBS_DIRECTORY = fileURLToPath(new URL("../src/libs/", import.meta.url));
+const PROJECT_DIRECTORY = fileURLToPath(
+  new URL("../projects/satoshi-ui/src/", import.meta.url),
+);
+const LIBS_DIRECTORY = fileURLToPath(
+  new URL("../projects/satoshi-ui/src/libs/", import.meta.url),
+);
 
 const ALIASES = [
   {
-    find: /^@presentation$/,
-    replacement: `${LIBS_DIRECTORY}presentation/index.ts`,
+    find: /^@libs$/,
+    replacement: `${LIBS_DIRECTORY}index.ts`,
   },
   {
-    find: /^@presentation\//,
-    replacement: `${LIBS_DIRECTORY}presentation/`,
+    find: /^@libs\//,
+    replacement: LIBS_DIRECTORY,
   },
   {
-    find: /^@aplicacion$/,
-    replacement: `${LIBS_DIRECTORY}aplicacion/index.ts`,
+    find: /^@components$/,
+    replacement: `${PROJECT_DIRECTORY}components/index.ts`,
   },
   {
-    find: /^@aplicacion\//,
-    replacement: `${LIBS_DIRECTORY}aplicacion/`,
+    find: /^@components\//,
+    replacement: `${PROJECT_DIRECTORY}components/`,
   },
   {
-    find: /^@domain$/,
-    replacement: `${LIBS_DIRECTORY}domain/index.ts`,
-  },
-  {
-    find: /^@domain\//,
-    replacement: `${LIBS_DIRECTORY}domain/`,
-  },
-  {
-    find: /^@infraestructura$/,
-    replacement: `${LIBS_DIRECTORY}infraestructura/index.ts`,
-  },
-  {
-    find: /^@infraestructura\//,
-    replacement: `${LIBS_DIRECTORY}infraestructura/`,
+    find: /^@test\//,
+    replacement: fileURLToPath(
+      new URL("../projects/satoshi-ui/test/", import.meta.url),
+    ),
   },
   {
     find: /^@assets\//,
-    replacement: `${SRC_DIRECTORY}assets/`,
+    replacement: `${PROJECT_DIRECTORY}assets/`,
   },
   {
     find: /^@\//,
-    replacement: SRC_DIRECTORY,
+    replacement: PROJECT_DIRECTORY,
   },
 ];
 
@@ -52,7 +46,7 @@ const ALIASES = [
  * @description Configuracion de Storybook para desarrollar y documentar la libreria.
  * Reutiliza los aliases del proyecto y el plugin de Tailwind/DaisyUI.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 2.0.0
  */
 const config: StorybookConfig = {
   stories: ["../stories/**/*.stories.@(ts|tsx)"],

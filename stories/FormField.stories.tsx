@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { FormField } from "@presentation";
+import { FormField } from "@components";
 import { useState } from "react";
 
 /**

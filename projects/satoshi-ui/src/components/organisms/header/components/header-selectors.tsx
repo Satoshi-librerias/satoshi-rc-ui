@@ -1,9 +1,7 @@
 import type { FC, JSX } from "react";
-import {
-  LanguageSelector,
-  ThemeSelector,
-  type HeaderTranslations,
-} from "@presentation";
+import { LanguageSelector } from "@components/molecules";
+import { ThemeSelector } from "@components/molecules";
+import type { HeaderTranslations } from "../types/header.types";
 
 /**
  * @description Define la variante visual de los selectores en la barra

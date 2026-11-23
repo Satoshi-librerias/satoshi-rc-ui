@@ -1,6 +1,7 @@
 import type { JSX } from "react";
-import { useLanguage } from "@aplicacion";
-import { Navigation, type NavigationItem } from "@presentation";
+import { useLanguage } from "@libs";
+import { Navigation } from "@components/molecules";
+import type { NavigationItem } from "@components/molecules/navigation/types/navigation.types";
 import { translateHeaderLabels } from "../utils/translate-header-labels.util";
 import type { HeaderTranslations } from "../types/header.types";
 

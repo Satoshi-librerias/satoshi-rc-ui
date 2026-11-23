@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Pagination } from "@presentation";
+import { Pagination } from "@components";
 
 /**
  * @description Stories de la molecula paginacion de la libreria.

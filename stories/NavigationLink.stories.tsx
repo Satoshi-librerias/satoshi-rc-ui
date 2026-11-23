@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { NavigationLink } from "@presentation";
+import { NavigationLink } from "@components";
 
 /**
  * @description Stories del enlace individual de navegacion.

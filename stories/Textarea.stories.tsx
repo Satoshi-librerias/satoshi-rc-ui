@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Textarea } from "@presentation";
+import { Textarea } from "@components";
 
 /**
  * @description Stories del area de texto reutilizable de la libreria.

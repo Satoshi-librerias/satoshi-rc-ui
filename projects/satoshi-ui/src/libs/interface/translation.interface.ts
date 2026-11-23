@@ -1,4 +1,4 @@
-import type { TranslationCatalog, TranslationParams } from "@/libs";
+import type { TranslationCatalog, TranslationParams } from "@libs/types";
 import type { ReactNode } from "react";
 
 /**

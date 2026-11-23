@@ -1,15 +1,15 @@
 import type { FC, JSX } from "react";
-import { useLanguage, useTheme } from "@aplicacion";
+import { useLanguage, useTheme } from "@libs";
+import { ThemeSelectorPanel } from "./theme-selector-panel";
+import { ThemeSelectorTrigger } from "./theme-selector-trigger";
+import { SEARCH_THRESHOLD } from "../constants";
 import {
   filterThemes,
   prioritizeSelectedTheme,
-  SEARCH_THRESHOLD,
-  ThemeSelectorPanel,
-  type ThemeSelectorProps,
-  ThemeSelectorTrigger,
   translateThemeSelectorMessages,
-  useThemeSelectorInteraction,
-} from "@presentation";
+} from "../utils";
+import { useThemeSelectorInteraction } from "../hook";
+import type { ThemeSelectorProps } from "../types";
 
 /**
  * @description Permite buscar, visualizar y seleccionar temas disponibles.

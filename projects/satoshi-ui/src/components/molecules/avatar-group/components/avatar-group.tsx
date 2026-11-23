@@ -1,6 +1,6 @@
 import { memo } from "react";
 import type { FC, JSX } from "react";
-import { Avatar } from "@presentation";
+import { Avatar } from "@components/atoms";
 import { getAvatarGroupClasses } from "../utils/get-avatar-group-classes.util";
 import {
   AVATAR_GROUP_DEFAULT_MAX,

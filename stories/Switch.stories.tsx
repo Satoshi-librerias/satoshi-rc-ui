@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Switch } from "@presentation";
-import { useLanguage } from "@aplicacion";
+import { Switch } from "@components";
+import { useLanguage } from "@libs";
 
 /**
  * @description Stories del interruptor reutilizable de la libreria.

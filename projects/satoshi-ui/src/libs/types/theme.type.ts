@@ -1,4 +1,4 @@
-import type { CSS_THEME_TOKENS } from "@domain";
+import { CSS_THEME_TOKENS } from "@libs/constants/theme-css-variable.const";
 
 /**
  * @description Define los colores que DaisyUI utiliza en un tema.

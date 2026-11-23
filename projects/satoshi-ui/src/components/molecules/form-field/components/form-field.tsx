@@ -1,6 +1,6 @@
 import { memo, useId } from "react";
 import type { FC, JSX } from "react";
-import { Input } from "@presentation";
+import { Input } from "@components/atoms";
 import { getFormFieldClasses } from "../utils/get-form-field-classes.util";
 import {
   FORM_FIELD_ERROR_CLASS,

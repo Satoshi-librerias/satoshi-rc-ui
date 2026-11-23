@@ -1,10 +1,8 @@
 import { useMemo, useState } from "react";
-import { useLanguage } from "@aplicacion";
-import {
-  filterLanguages,
-  LANGUAGE_SEARCH_THRESHOLD,
-  type UseLanguageSelectorResult,
-} from "@presentation";
+import { useLanguage } from "@libs";
+import { LANGUAGE_SEARCH_THRESHOLD } from "../constants";
+import { filterLanguages } from "../utils";
+import type { UseLanguageSelectorResult } from "../types";
 
 /**
  * @description Administra el estado del selector de idiomas.

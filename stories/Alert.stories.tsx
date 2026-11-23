@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Alert } from "@presentation";
+import { Alert } from "@components";
 
 /**
  * @description Stories de la alerta reutilizable de la libreria.

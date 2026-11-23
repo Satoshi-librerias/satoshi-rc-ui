@@ -1,5 +1,3 @@
-import type { ThemeColorToken } from "@domain";
-
 /**
  * @description Define los nombres de las variables CSS de DaisyUI.
  * @author Steveen Cues
@@ -35,8 +33,8 @@ export const CSS_THEME_TOKENS = {
  * @version 1.0.0
  */
 export const CSS_THEME_TOKEN_ENTRIES: readonly [
-  ThemeColorToken,
-  (typeof CSS_THEME_TOKENS)[ThemeColorToken],
+  keyof typeof CSS_THEME_TOKENS,
+  (typeof CSS_THEME_TOKENS)[keyof typeof CSS_THEME_TOKENS],
 ][] = [
   ["primary", CSS_THEME_TOKENS.primary],
   ["primaryContent", CSS_THEME_TOKENS.primaryContent],

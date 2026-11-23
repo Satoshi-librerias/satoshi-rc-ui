@@ -5,23 +5,19 @@ import type { JSX } from "react";
 import type {
   ILanguageContextValue,
   ITranslateProviderProps,
-  TranslationParams,
-  TranslationDictionary,
-} from "@domain";
+} from "@libs/interface";
+import type { TranslationDictionary, TranslationParams } from "@libs/types";
 
-import { TranslateContext } from "@aplicacion";
+import { TranslateContext } from "@libs/contexts";
 
-import {
-  loadLanguagePreference,
-  saveLanguagePreference,
-} from "@infraestructura";
+import { loadLanguagePreference, saveLanguagePreference } from "@libs/storage";
 
 import {
   assertLanguageExists,
   resolveActiveLanguage,
   resolveInitialLanguage,
   translateMessage,
-} from "@aplicacion";
+} from "@libs/utils";
 
 interface LanguagePreferenceConfiguration {
   readonly translations: ITranslateProviderProps["translations"];
