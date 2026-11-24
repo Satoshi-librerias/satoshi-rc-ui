@@ -3,8 +3,7 @@
 ## Proposito de estas instrucciones
 
 Reglas universales de trabajo y quirks del entorno. Lo especifico del proyecto
-(stack, comandos, convenciones) va en su rulebook (`AGENTS.md`); si algo falta,
-se anade alli, no aqui.
+(stack, comandos, convenciones) va en su rulebook (`AGENTS.md`).
 
 ## Documentacion de operaciones
 
