@@ -34,7 +34,7 @@ jobs:
       - name: Build Storybook (production, base /satoshi-rc-ui/, desde main)
         run: |
           git fetch origin main --depth 1
-          git worktree add --detach ../main-tree origin/main
+          git -c core.hooksPath=/dev/null worktree add --detach ../main-tree origin/main
           cd ../main-tree
           npm install --no-audit --no-fund
           npm run build:storybook
