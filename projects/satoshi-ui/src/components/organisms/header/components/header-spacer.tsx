@@ -52,7 +52,7 @@ export const HeaderSpacer: FC<HeaderSpacerProps> = ({
   return (
     <div
       aria-hidden="true"
-      className={`${heights.mobile} ${className}`.trim()}
+      className={`${heights.mobile} ${heights.desktop} ${className}`.trim()}
     />
   );
 };

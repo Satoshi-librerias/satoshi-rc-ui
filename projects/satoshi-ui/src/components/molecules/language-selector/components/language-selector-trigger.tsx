@@ -5,18 +5,19 @@ import type { FC, JSX } from "react";
 /**
  * @description Renderiza el activador del selector de idiomas.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const LanguageSelectorTrigger: FC<LanguageSelectorTriggerProps> = ({
   language,
   isOpen,
   onClick,
+  ariaLabel,
 }): JSX.Element => {
   return (
     <button
       aria-expanded={isOpen}
       aria-haspopup="listbox"
-      aria-label="Seleccionar idioma"
+      aria-label={ariaLabel}
       className="btn btn-ghost flex w-full items-center justify-between gap-3 rounded-full border border-base-300 bg-base-100/80 px-3 shadow-sm transition-colors hover:border-primary hover:bg-base-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       onClick={onClick}
       type="button"

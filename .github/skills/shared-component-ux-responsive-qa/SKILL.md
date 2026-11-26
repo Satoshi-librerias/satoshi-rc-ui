@@ -41,7 +41,9 @@ keyboard and pointer input, and mobile, tablet, and desktop layouts.
    and that translated output is not a raw key. Remove invalid key references
    rather than shipping missing labels; remove stale catalog keys only after
    checking dynamic and library-owned usage.
-9. Run focused component tests, lint, formatting, and `npm run build:lib`.
+9. Run focused component tests, lint, formatting, and `npm run build:lib`. Run
+   every shell command in Bash (Git Bash on Windows, Bash on Linux); never use
+   Windows CMD, PowerShell, `.bat`/`.cmd` scripts, or their exclusive syntax.
    Visual QA is mandatory on mobile and desktop: use 320/390 CSS pixels for
    mobile, 1024/1440 for desktop, and 768 for tablet. Check overflow,
    reachability, themes, and at least one full consumer flow on mobile and
@@ -81,6 +83,33 @@ keyboard and pointer input, and mobile, tablet, and desktop layouts.
   just the theme-selector state.
 - Visual QA needs both mobile and desktop coverage; tablet is an additional
   breakpoint, not a substitute for either device class.
+- Every user-facing string in a shared component must resolve through the
+  translation context, never a hardcoded literal. `LanguageSelector` shipped
+  Spanish-only `aria-label`s ("Seleccionar idioma", "Idiomas disponibles") while
+  `ThemeSelector` was fully translatable; the fix mirrors the
+  `translateThemeSelectorMessages` pattern with a
+  `translateLanguageSelectorMessages` util and a `translations` prop with
+  `language.*` default keys. Consumers must add those keys to every locale.
+- Precompile module-level regexes. `interpolateTranslation` compiled
+  `TranslationRegex.INTERPOLATION_PLACEHOLDER` on every `t()` call; hoisting it
+  to a module-level `INTERPOLATION_REGEX` constant removes per-call compilation
+  in text-heavy renders.
+- Modal overlays that block the page must lock background scroll
+  (`document.body.style.overflow = "hidden"` restored on cleanup) or the page
+  scrolls behind the curtain. `GuidedTour` now locks scroll while open; verify
+  the lock in a browser after clearing Vite's dep-optimizer cache
+  (`node_modules/.vite`), because a stale pre-bundle serves the old module and
+  masks the change.
+- A missing tour target should be skipped silently (no `console.error` per
+  render); a missing target is a consumer configuration issue, not a runtime
+  failure worth log noise.
+- `jsdom@30` pulls `undici@8`, which requires Node zstd APIs absent in Node
+  22.12 and breaks Vitest fork workers ("Cannot read properties of undefined
+  (reading 'bind')"). Pin `jsdom@26` (and `undici@7`) when the CI/local Node is
+  below 22.16.
+- `HeaderSpacer` declared separate mobile/desktop heights but only rendered the
+  mobile class; render both literals so Tailwind's static scan emits the
+  responsive pair.
 
 ## Improvement Opportunities
 

@@ -25,6 +25,11 @@ interface CookieConsentPanelProps {
 
 const CONSENT_BACKDROP_CLASS = "fixed inset-0 z-[80] bg-base-content/30";
 
+/**
+ * @description Validates a stored consent preference object.
+ * @param value Parsed value from localStorage.
+ * @returns True when the value is a valid consent preference.
+ */
 function isConsentPreference(value: unknown): value is ConsentPreference {
   return (
     typeof value === "object" &&
@@ -36,6 +41,11 @@ function isConsentPreference(value: unknown): value is ConsentPreference {
   );
 }
 
+/**
+ * @description Reads the stored consent preference from localStorage.
+ * @param storageKey Storage key of the consent.
+ * @returns Initial visibility and optional cookies state.
+ */
 function getInitialConsent(storageKey: string): InitialConsentState {
   if (typeof window === "undefined") {
     return { isVisible: false, allowOptional: false };
@@ -57,6 +67,17 @@ function getInitialConsent(storageKey: string): InitialConsentState {
   }
 }
 
+/**
+ * @description Renders the consent dialog with manage mode and actions.
+ * @param props Panel properties.
+ * @param props.isManaging Whether the manage mode is active.
+ * @param props.allowOptional Whether optional cookies are allowed.
+ * @param props.translations Translated labels.
+ * @param props.onOptionalChange Callback executed on optional change.
+ * @param props.onManage Callback executed on manage.
+ * @param props.onSave Callback executed on save.
+ * @returns Consent panel ready to render.
+ */
 function CookieConsentPanel({
   isManaging,
   allowOptional,

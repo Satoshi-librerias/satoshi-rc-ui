@@ -8,6 +8,17 @@ import type {
 } from "@libs/types";
 
 /**
+ * @description Regex de interpolacion precompilado. Compilarlo en cada
+ * llamada de `t()` multiplicaba el coste en renders con muchos textos.
+ * @author Steveen Cues
+ * @version 2.2.0
+ */
+const INTERPOLATION_REGEX = new RegExp(
+  TranslationRegex.INTERPOLATION_PLACEHOLDER,
+  GLOBAL_REGEX_FLAG,
+);
+
+/**
  * @description Comprueba si un idioma existe en el catalogo.
  * @param translations Catalogo disponible.
  * @param language Codigo del idioma.
@@ -205,13 +216,8 @@ export function interpolateTranslation(
   message: string,
   params?: TranslationParams,
 ): string {
-  const placeholderRegex = new RegExp(
-    TranslationRegex.INTERPOLATION_PLACEHOLDER,
-    GLOBAL_REGEX_FLAG,
-  );
-
   return message.replace(
-    placeholderRegex,
+    INTERPOLATION_REGEX,
     (placeholder: string, key: string): string =>
       resolveInterpolationValue(placeholder, key, params),
   );
