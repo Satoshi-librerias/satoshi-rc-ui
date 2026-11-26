@@ -9,12 +9,13 @@ o documentacion equivalente) y en su propia documentacion.
 
 ## Contenido
 
-| Ruta                         | Que es                                                                                                                                                                     |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `copilot-instructions.md`    | Nucleo siempre cargado (<= 80 lineas): quirks de entorno, politica de idioma, reglas de trabajo, commits, adopcion.                                                        |
-| `skills/ops-lifecycle/`      | Skill del ciclo de vida: plantillas de documentos, reglas duras de `.ops`, trazabilidad, handoff y bootstrap. Sus `reference/` se cargan solo cuando la tarea toca `.ops`. |
-| `tools/validate-kit.mjs`     | Validador del kit (Node >= 18, sin dependencias): frontmatter de la skill, ids unicos, enlaces internos, tokens de proyecto y tamano del nucleo.                           |
-| `workflows/validate-kit.yml` | Workflow opcional que ejecuta el validador; se auto-desactiva si el kit no esta instalado.                                                                                 |
+| Ruta                               | Que es                                                                                                                                                                     |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `copilot-instructions.md`          | Nucleo siempre cargado (<= 80 lineas): quirks de entorno, politica de idioma, reglas de trabajo, commits, adopcion.                                                        |
+| `skills/ops-lifecycle/`            | Skill del ciclo de vida: plantillas de documentos, reglas duras de `.ops`, trazabilidad, handoff y bootstrap. Sus `reference/` se cargan solo cuando la tarea toca `.ops`. |
+| `skills/daisyui-component-engine/` | Skill del motor de componentes: DaisyUI como nucleo visual (primitivos y tokens semanticos); de cero solo lo que DaisyUI no cubre.                                         |
+| `tools/validate-kit.mjs`           | Validador del kit (Node >= 18, sin dependencias): frontmatter de la skill, ids unicos, enlaces internos, tokens de proyecto y tamano del nucleo.                           |
+| `workflows/validate-kit.yml`       | Workflow opcional que ejecuta el validador; se auto-desactiva si el kit no esta instalado.                                                                                 |
 
 ## Instalacion en un repo
 

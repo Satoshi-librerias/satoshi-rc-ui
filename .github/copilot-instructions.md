@@ -44,20 +44,19 @@ ejecucion real.
 
 La libreria React vive en `projects/satoshi-ui/src`: `components/` (UI:
 atoms/molecules/organisms) y `libs/` (transversal sin JSX). Reglas completas,
-arbol oficial y gestion de alias en la skill `react-library-architecture`.
-Resumen: alias oficiales `@components`, `@libs` y `@test` en
-`tsconfig.app.json`, `vite.config.ts`, `vitest.config.ts` y `.storybook/main.ts`
-(los cuatro); `tsconfig.test.json` extiende el app config e incluye `test/` para
-que el IDE resuelva los alias en las pruebas; direccion `components -> libs`.
+arbol oficial, alias oficiales (`@components`, `@libs`, `@test`) y pruebas
+centralizadas en la skill `react-library-architecture`; direccion
+`components -> libs`.
 
 - Tailwind CSS responsive obligatorio (`sm:`, `md:`, `lg:`), sin CSS inline.
+- **DaisyUI es el motor de componentes:** usa sus clases y tokens semanticos
+  (`btn`, `card`, `base-100`); crea de cero solo lo que DaisyUI no cubre (skill
+  `daisyui-component-engine`).
 - Componentes en `components/<nivel>/<nombre>/` exportados por su barril; logica
   compartida en `libs/<modulo>/`.
-- Un solo import por alias: valores y tipos (`type`) juntos en la misma
-  importacion de `@libs` o `@components`; sin mezclar `@libs` con
-  `@libs/<modulo>` en el mismo archivo.
-- Los modulos internos de `libs` se importan entre si con `@libs/<modulo>` (por
-  ejemplo `@libs/contexts`), nunca con `../`.
+- Un solo import por alias: valores y tipos (`type`) juntos; sin mezclar `@libs`
+  con `@libs/<modulo>` en el mismo archivo. Los modulos internos de `libs` se
+  importan entre si con `@libs/<modulo>`, nunca con `../`.
 - Pruebas unitarias centralizadas en `projects/satoshi-ui/test/` (`*.test.tsx`
   espejando `src/`); sin ellas no esta terminada. Importan desde `@libs` /
   `@components` y usan `@test/*` para recursos de testing.
