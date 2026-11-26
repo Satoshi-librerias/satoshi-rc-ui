@@ -21,7 +21,7 @@ export const ThemeSelectorTrigger: FC<ThemeSelectorTriggerProps> = ({
   return (
     <button
       type="button"
-      aria-label={`${ariaLabel ?? selectedLabel ?? "Select theme"}: ${themeName}`}
+      aria-label={`${ariaLabel ?? selectedLabel ?? themeName}: ${themeName}`}
       aria-haspopup="listbox"
       aria-expanded={isOpen}
       onClick={onToggle}

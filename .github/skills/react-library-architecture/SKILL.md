@@ -85,6 +85,10 @@ projects/satoshi-ui/
    `@source` directives must cover the library and `stories/`.
 9. **TypeScript strict, no `any`**, explicit return types on exported functions,
    JSDoc in Spanish without special characters.
-10. **Validation before closing a task**: `npm test`, `npm run lint`,
+10. **Bash only for shell commands** (Git Bash on Windows, Bash on Linux): never
+    Windows CMD, PowerShell, `.bat`/`.cmd` scripts, or their exclusive syntax;
+    if a command fails, diagnose and fix it in Bash. Prefer `npm` over
+    Windows-only executables such as `npm.cmd`.
+11. **Validation before closing a task**: `npm test`, `npm run lint`,
     `npm run format:check`, `npm run build:lib`, and `npm run build:storybook`
     for visual changes.

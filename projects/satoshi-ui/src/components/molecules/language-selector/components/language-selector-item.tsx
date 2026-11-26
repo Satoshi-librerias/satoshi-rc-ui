@@ -5,12 +5,13 @@ import type { LanguageSelectorItemProps } from "../types";
 /**
  * @description Renderiza una opcion individual de idioma.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const LanguageSelectorItem: FC<LanguageSelectorItemProps> = ({
   language,
   isSelected,
   onSelect,
+  selectedLabel,
 }): JSX.Element => {
   return (
     <button
@@ -32,7 +33,7 @@ export const LanguageSelectorItem: FC<LanguageSelectorItemProps> = ({
 
       {isSelected && (
         <svg
-          aria-label="Idioma seleccionado"
+          aria-label={selectedLabel}
           className="h-4 w-4 shrink-0"
           fill="none"
           viewBox="0 0 24 24"

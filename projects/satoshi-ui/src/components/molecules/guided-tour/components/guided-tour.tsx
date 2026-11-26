@@ -28,6 +28,12 @@ interface GuidedTourDialogProps {
   readonly onSkip: () => void;
 }
 
+/**
+ * @description Reads the stored tour completion flag.
+ * @param storageKey Storage key of the tour.
+ * @param hasSteps Whether the tour has steps configured.
+ * @returns True when the tour should open automatically.
+ */
 function getInitialTourOpen(storageKey: string, hasSteps: boolean): boolean {
   if (!hasSteps || typeof window === "undefined") {
     return false;
@@ -41,6 +47,18 @@ function getInitialTourOpen(storageKey: string, hasSteps: boolean): boolean {
   }
 }
 
+/**
+ * @description Renders the tour dialog with progress bar and controls.
+ * @param props Dialog properties.
+ * @param props.step Current tour step.
+ * @param props.index Zero based step index.
+ * @param props.total Total number of steps.
+ * @param props.translations Translated labels.
+ * @param props.onBack Callback executed on back.
+ * @param props.onNext Callback executed on next.
+ * @param props.onSkip Callback executed on skip.
+ * @returns Tour dialog ready to render.
+ */
 function GuidedTourDialog({
   step,
   index,
@@ -132,6 +150,11 @@ function GuidedTourDialog({
   );
 }
 
+/**
+ * @description Renders the backdrop and the tour dialog together.
+ * @param props Dialog properties forwarded to the dialog.
+ * @returns Overlay ready to render.
+ */
 function GuidedTourOverlay(props: GuidedTourDialogProps): JSX.Element {
   return (
     <>
@@ -148,6 +171,13 @@ function GuidedTourOverlay(props: GuidedTourDialogProps): JSX.Element {
   );
 }
 
+/**
+ * @description Highlights the step target element and scrolls it into view.
+ * @param step Current tour step.
+ * @param previousOutline Ref holding the saved inline styles.
+ * @param clearHighlight Callback that restores the saved styles.
+ * @returns Cleanup callback or undefined when the target is missing.
+ */
 function highlightTourTarget(
   step: GuidedTourStep,
   previousOutline: { current: SavedOutline | null },
@@ -155,7 +185,6 @@ function highlightTourTarget(
 ): (() => void) | void {
   const target = document.getElementById(step.targetId);
   if (target === null) {
-    console.error(`Guided tour target not found: #${step.targetId}`);
     return;
   }
 
@@ -178,10 +207,23 @@ function highlightTourTarget(
 }
 
 /**
+ * @description Bloquea el scroll del fondo mientras el tour esta abierto.
+ * @author Steveen Cues
+ * @version 1.1.0
+ */
+function lockBodyScroll(): () => void {
+  const previousOverflow = document.body.style.overflow;
+  document.body.style.overflow = "hidden";
+  return (): void => {
+    document.body.style.overflow = previousOverflow;
+  };
+}
+
+/**
  * @description Presenta una guia inicial y permite volver a iniciarla.
  * La finalizacion se recuerda localmente para mostrarla automaticamente una vez.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const GuidedTour: FC<GuidedTourProps> = ({
   steps,
@@ -223,7 +265,17 @@ export const GuidedTour: FC<GuidedTourProps> = ({
     if (!showTour) {
       return;
     }
-    return highlightTourTarget(step, previousOutline, clearHighlight);
+    const unlockScroll = lockBodyScroll();
+    const clearTarget = highlightTourTarget(
+      step,
+      previousOutline,
+      clearHighlight,
+    );
+
+    return (): void => {
+      unlockScroll();
+      clearTarget?.();
+    };
   }, [activeStep, clearHighlight, showTour, step]);
 
   useEffect((): (() => void) => {

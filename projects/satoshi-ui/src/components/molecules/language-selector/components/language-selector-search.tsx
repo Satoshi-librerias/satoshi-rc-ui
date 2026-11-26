@@ -1,15 +1,15 @@
-import { LANGUAGE_SEARCH_PLACEHOLDER } from "../constants";
 import type { LanguageSelectorSearchProps } from "../types";
 import type { ChangeEvent, FC, JSX } from "react";
 
 /**
  * @description Renderiza el campo de busqueda de idiomas.
  * @author Steveen Cues
- * @version 1.0.0
+ * @version 1.1.0
  */
 export const LanguageSelectorSearch: FC<LanguageSelectorSearchProps> = ({
   value,
   onChange,
+  placeholder,
 }): JSX.Element => {
   /**
    * @description Propaga el texto introducido.
@@ -34,11 +34,11 @@ export const LanguageSelectorSearch: FC<LanguageSelectorSearchProps> = ({
       </svg>
 
       <input
-        aria-label="Buscar idioma"
+        aria-label={placeholder}
         autoComplete="off"
         className="grow"
         onChange={handleChange}
-        placeholder={LANGUAGE_SEARCH_PLACEHOLDER}
+        placeholder={placeholder}
         type="search"
         value={value}
       />

@@ -15,6 +15,9 @@ applyTo: ".github/specs/**/*.md"
 - Implement the smallest complete change. Keep generic UI reusable and
   brand-neutral; components inherit the consumer font and use DaisyUI semantic
   theme tokens.
+- Use Bash for all terminal commands (Git Bash on Windows, Bash on Linux). Never
+  use Windows CMD, PowerShell, `.bat`/`.cmd` scripts, or their exclusive syntax;
+  if a command fails, diagnose and fix it in Bash.
 - Validate the exact behavior in tests and production build. Do not mark tasks
   complete without command or browser evidence.
 - For performance work, measure a baseline and identify a real bottleneck before

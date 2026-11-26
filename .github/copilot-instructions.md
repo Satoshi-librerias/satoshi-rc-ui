@@ -20,8 +20,10 @@ de la primera tarea de desarrollo.
 
 ## Gotchas del entorno
 
-- **Shell:** bash preferente (Git Bash en Windows). **CRLF/LF:** respeta los
-  finales de linea del repo. **curl:** JSON entre comillas simples o
+- **Shell:** bash obligatoria (Git Bash en Windows, Bash en Linux); nunca CMD,
+  PowerShell, `.bat`/`.cmd` ni sintaxis exclusiva de esas shells; si falla un
+  comando, resuelvelo en Bash. Prioriza `npm` sobre `npm.cmd`. **CRLF/LF:**
+  respeta los finales de linea del repo. **curl:** JSON entre comillas simples o
   `--data @archivo.json`.
 
 ## Politica de sesion y comunicacion
