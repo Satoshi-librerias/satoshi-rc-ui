@@ -15,23 +15,20 @@ de la primera tarea de desarrollo.
 
 - **Respuestas al usuario:** en el idioma de su ultimo mensaje.
 - **Artefactos tecnicos** (codigo, comentarios, commits, logs, `.ops/`): ASCII
-  sin diacriticos (el collate de la plataforma dana los no ASCII). La UI del
-  producto sigue la convencion del proyecto.
+  sin diacriticos; la UI del producto sigue la convencion del proyecto.
 
 ## Gotchas del entorno
 
 - **Shell:** bash obligatoria (Git Bash en Windows, Bash en Linux); nunca CMD,
-  PowerShell, `.bat`/`.cmd` ni sintaxis exclusiva de esas shells; si falla un
-  comando, resuelvelo en Bash. Prioriza `npm` sobre `npm.cmd`. **CRLF/LF:**
-  respeta los finales de linea del repo. **curl:** JSON entre comillas simples o
-  `--data @archivo.json`.
+  PowerShell, `.bat`/`.cmd` ni sintaxis exclusiva de esas shells. Prioriza `npm`
+  sobre `npm.cmd`. **CRLF/LF:** respeta los finales de linea del repo. **curl:**
+  JSON entre comillas simples o `--data @archivo.json`.
 
-## Politica de sesion y comunicacion
+## Contexto de sesion (skill `session-context`)
 
-Sesiones cortas y enfocadas; si la tarea no cabe, deja el contexto en
-`PROGRESS.md` y `.ops/project/handoff.md`. Lee `.ops/` antes de actuar.
-Respuestas breves con evidencia; nunca marques algo como verificado sin
-ejecucion real.
+No pierdas el contexto: al iniciar escribe en `PROGRESS.md` (o
+`.ops/project/handoff.md`) objetivo, archivos tocados, hallazgos y siguiente
+paso; actualizalo tras cada avance y al reanudar lee las notas, no reexplores.
 
 ## Reglas de trabajo
 
@@ -39,6 +36,8 @@ ejecucion real.
    colaterales ni TODOs.
 2. Valida siempre: compila, prueba o ejecuta el camino minimo de tu cambio.
 3. Si algo no funciona, prueba una alternativa antes de declararlo imposible.
+4. Nunca ejecutes `git commit` ni `git push`: deja los cambios en el working
+   tree para que el humano revise y confirme.
 
 ## Arquitectura y convenciones (projects/satoshi-ui)
 
@@ -70,9 +69,9 @@ centralizadas en la skill `react-library-architecture`; direccion
 
 ## Commits
 
-Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`).
-Un commit = un cambio coherente; sin artefactos generados ni secretos. Mensajes
-en ASCII sin diacriticos.
+El agente nunca confirma: sin `git commit` ni `git push`; el humano revisa y
+confirma. Si piden mensaje, proponlo en Conventional Commits (`feat:`, `fix:`,
+`docs:`, `chore:`, `refactor:`, `test:`), ASCII sin diacriticos, sin secretos.
 
 ## Adopcion
 
