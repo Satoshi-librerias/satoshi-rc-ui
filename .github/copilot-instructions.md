@@ -3,77 +3,77 @@
 ## Proposito de estas instrucciones
 
 Reglas universales de trabajo y quirks del entorno. Lo especifico del proyecto
-(stack, comandos, convenciones) va en su rulebook (`AGENTS.md`); si algo falta,
-se anade alli, no aqui.
+(stack, comandos, convenciones) va en su rulebook (`AGENTS.md`).
 
 ## Documentacion de operaciones
 
-Usa la skill `ops-lifecycle` para crear o actualizar los documentos de `.ops/`:
-define plantillas, estados y trazabilidad. Si el repo no tiene `.ops/`, ejecuta
-su bootstrap antes de la primera tarea de desarrollo. No repite sus reglas.
+Usa la skill `ops-lifecycle` para los documentos de `.ops/` (plantillas,
+estados, trazabilidad). Si el repo no tiene `.ops/`, ejecuta su bootstrap antes
+de la primera tarea de desarrollo.
 
 ## Idioma
 
 - **Respuestas al usuario:** en el idioma de su ultimo mensaje.
-- **Artefactos tecnicos** (codigo, identificadores, comentarios, commits, logs y
-  `.ops/`): ASCII sin diacriticos. Razon: el collate y las herramientas de la
-  plataforma danan los caracteres no ASCII (ordenan mal, rompen diffs y generan
-  mojibake en terminales Windows). La UI del producto y el contenido dirigido a
-  usuarios finales siguen la convencion del proyecto.
-- Documentacion general en Markdown sigue la convencion del repo si existe; por
-  defecto, sin diacriticos (diffs y buscadores estables).
+- **Artefactos tecnicos** (codigo, comentarios, commits, logs, `.ops/`): ASCII
+  sin diacriticos; la UI del producto sigue la convencion del proyecto.
 
-## Gotchas del entorno (aplican siempre)
+## Gotchas del entorno
 
-- **Shell:** bash preferente. En Windows usa Git Bash (o PowerShell); en
-  Linux/Mac el del sistema. La sintaxis POSIX funciona igual en los tres.
-- **CRLF/LF:** al crear scripts, respeta los finales de linea del repo.
-- **curl:** JSON entre comillas simples o `--data @archivo.json` (en PowerShell,
-  curl.exe).
+- **Shell:** bash obligatoria (Git Bash en Windows, Bash en Linux); nunca CMD,
+  PowerShell, `.bat`/`.cmd` ni sintaxis exclusiva de esas shells. Prioriza `npm`
+  sobre `npm.cmd`. **CRLF/LF:** respeta los finales de linea del repo. **curl:**
+  JSON entre comillas simples o `--data @archivo.json`.
 
-## Politica de sesion
+## Contexto de sesion (skill `session-context`)
 
-Sesiones cortas y enfocadas: un objetivo por sesion, verificado antes de cerrar.
-Si la tarea no cabe, divide y deja el contexto en `PROGRESS.md` y
-`.ops/project/handoff.md` (ver skill `ops-lifecycle`). Al abrir sesion en un
-repo con `.ops` (o `PROGRESS.md`), leelos antes de actuar.
-
-## Comunicacion
-
-- Respuestas breves: lo que se hizo, la evidencia y el siguiente paso.
-- Explica decisiones no obvias en una linea; los detalles van al documento.
-- Nunca marques algo como verificado sin evidencia real de ejecucion.
+No pierdas el contexto: al iniciar escribe en `PROGRESS.md` (o
+`.ops/project/handoff.md`) objetivo, archivos tocados, hallazgos y siguiente
+paso; actualizalo tras cada avance y al reanudar lee las notas, no reexplores.
 
 ## Reglas de trabajo
 
-1. Lee antes de escribir: entiende la zona afectada antes de proponer cambios.
-2. Cambios minimos y completos: sin refactorizaciones colaterales ni TODOs.
-3. Valida siempre: compila, prueba o ejecuta el camino minimo de tu cambio.
-4. Si algo no funciona, prueba una alternativa antes de declararlo imposible.
+1. Lee antes de escribir; cambios minimos y completos, sin refactorizaciones
+   colaterales ni TODOs.
+2. Valida siempre: compila, prueba o ejecuta el camino minimo de tu cambio.
+3. Si algo no funciona, prueba una alternativa antes de declararlo imposible.
+4. Nunca ejecutes `git commit` ni `git push`: deja los cambios en el working
+   tree para que el humano revise y confirme.
 
-## Convenciones de codigo y UI
+## Arquitectura y convenciones (projects/satoshi-ui)
 
-- Todo componente nuevo usa **Tailwind CSS responsive** (breakpoints `sm:`,
-  `md:`, `lg:`), sin CSS inline ni hojas propias por componente.
-- Respeta la estructura: atoms/molecules/organisms en `src/libs/presentation/`,
-  logica en `aplicacion/`, tipos en `domain/`, infra en `infraestructura/`;
-  exporta cada pieza por su `index.ts`.
-- Toda pieza nueva o modificada lleva **pruebas unitarias** en `src/test/`
-  (mismo camino que el componente); no se considera terminada sin ellas.
-- La documentacion se genera con **JSDoc** (`@description`, `@param`,
-  `@returns`, `@version`, `@author`) y **sin caracteres especiales** (acentos,
-  enes, signos de apertura): ESLint (`jsdoc/*`) lo valida en cada commit.
+La libreria React vive en `projects/satoshi-ui/src`: `components/` (UI:
+atoms/molecules/organisms) y `libs/` (transversal sin JSX). Reglas completas,
+arbol oficial, alias oficiales (`@components`, `@libs`, `@test`) y pruebas
+centralizadas en la skill `react-library-architecture`; direccion
+`components -> libs`.
+
+- Tailwind CSS responsive obligatorio (`sm:`, `md:`, `lg:`), sin CSS inline.
+- **DaisyUI es el motor de componentes:** usa sus clases y tokens semanticos
+  (`btn`, `card`, `base-100`); crea de cero solo lo que DaisyUI no cubre (skill
+  `daisyui-component-engine`).
+- Componentes en `components/<nivel>/<nombre>/` exportados por su barril; logica
+  compartida en `libs/<modulo>/`.
+- Un solo import por alias: valores y tipos (`type`) juntos; sin mezclar `@libs`
+  con `@libs/<modulo>` en el mismo archivo. Los modulos internos de `libs` se
+  importan entre si con `@libs/<modulo>`, nunca con `../`.
+- Pruebas unitarias centralizadas en `projects/satoshi-ui/test/` (`*.test.tsx`
+  espejando `src/`); sin ellas no esta terminada. Importan desde `@libs` /
+  `@components` y usan `@test/*` para recursos de testing.
+- JSDoc en espanol sin caracteres especiales (`@description`, `@param`,
+  `@returns`, `@version`, `@author`); lo valida ESLint (`jsdoc/*`).
+
+## Validacion (comandos oficiales)
+
+`npm test` (Vitest, jsdom), `npm run lint`, `npm run format:check`,
+`npm run build:lib`, `npm run build` y `npm run build:storybook`.
 
 ## Commits
 
-- Conventional Commits: `feat:`, `fix:`, `docs:`, `chore:`, `refactor:` o
-  `test:`.
-- Un commit = un cambio coherente; sin artefactos generados ni secretos.
-- Mensajes en ASCII sin diacriticos (regla de idioma de arriba).
+El agente nunca confirma: sin `git commit` ni `git push`; el humano revisa y
+confirma. Si piden mensaje, proponlo en Conventional Commits (`feat:`, `fix:`,
+`docs:`, `chore:`, `refactor:`, `test:`), ASCII sin diacriticos, sin secretos.
 
 ## Adopcion
 
-Kit generico. Para adoptarlo: copia `copilot-instructions.md` a
-`.github/copilot-instructions.md`, la skill a `.github/skills/`, y el flujo de
-trabajo a `.github/workflows/` (ver README del kit). Lo especifico del proyecto
-va en su rulebook (preferiblemente `AGENTS.md`); el kit funciona sin que exista.
+Kit generico: copia este archivo a `.github/copilot-instructions.md`, las skills
+a `.github/skills/` y los workflows a `.github/workflows/`.

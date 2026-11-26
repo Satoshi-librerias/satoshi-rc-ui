@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { JSX } from "react";
-import { useLanguage } from "@aplicacion";
+import { useLanguage } from "@libs";
 
 /**
  * @description Stories del hook useLanguage de la libreria.

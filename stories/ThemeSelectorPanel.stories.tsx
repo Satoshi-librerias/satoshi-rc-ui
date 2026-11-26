@@ -1,9 +1,6 @@
 import type { Decorator, Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import {
-  ThemeSelectorPanel,
-  type ThemeSelectorPanelProps,
-} from "@presentation";
+import { ThemeSelectorPanel, type ThemeSelectorPanelProps } from "@components";
 import { STORY_THEMES } from "./fixtures";
 
 /**

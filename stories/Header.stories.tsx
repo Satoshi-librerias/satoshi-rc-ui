@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Header } from "@presentation";
+import { Header } from "@components";
 
 /**
  * @description Elementos de navegacion compartidos por las stories.

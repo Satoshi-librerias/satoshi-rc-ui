@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Navigation, ResponsiveMenu } from "@presentation";
+import { Navigation, ResponsiveMenu } from "@components";
 
 /**
  * @description Elementos de navegacion compartidos por las stories.

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
-import { LanguageSelectorSearch } from "@presentation";
+import { LanguageSelectorSearch } from "@components";
 
 /**
  * @description Stories del campo de busqueda del selector de idiomas.

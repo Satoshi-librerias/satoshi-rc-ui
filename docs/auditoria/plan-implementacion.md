@@ -66,7 +66,7 @@ lint/format/build en verde.
 
 | Paso | Acción                                                                                                                                                        | Detalle      |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| 2.1  | Importar tipos desde `@domain` en `translate.provider.tsx` y borrar duplicados locales                                                                        | BK-03        |
+| 2.1  | Importar tipos desde `domain` en `translate.provider.tsx` y borrar duplicados locales                                                                         | BK-03        |
 | 2.2  | Crear `infraestructura/platform/` y mover `crypto-api`, `storage-api`, `text-encoding`, `base64`                                                              | BK-06        |
 | 2.3  | Mover `encryption.service.ts` a `infraestructura/crypto/`                                                                                                     | BK-06        |
 | 2.4  | `encrypted-preference.storage.ts` importa de rutas relativas internas                                                                                         | BK-06        |
@@ -77,7 +77,7 @@ lint/format/build en verde.
 | 2.9  | Eliminar alias `@styles/*` de `tsconfig.app.json`                                                                                                             | BK-11        |
 | 2.10 | Actualizar barrels y verificar con greps de aceptación de RFC-002                                                                                             | —            |
 
-**Criterio de salida:** 0 imports de `@aplicacion` en `infraestructura`, 0
+**Criterio de salida:** 0 imports de `aplicacion` en `infraestructura`, 0
 accesos directos a `window.localStorage` en `aplicacion`, lint/build en verde.
 
 ---
@@ -138,7 +138,7 @@ npm run build:lib     # ✅
 test -f dist/index.d.ts
 npm pack --dry-run    # ✅ tarball limpio con tipos
 # Greps de aceptación RFC-002:
-grep -rn "@aplicacion" src/libs/infraestructura/   # → 0
+grep -rn "aplicacion" src/libs/infraestructura/   # → 0
 grep -rn "window.localStorage" src/libs/aplicacion/ # → 0
 ```
 

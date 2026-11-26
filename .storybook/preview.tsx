@@ -1,10 +1,10 @@
 import type { Decorator, Preview } from "@storybook/react-vite";
 import { DecoratorHelpers } from "@storybook/addon-themes";
 import { useGlobals } from "storybook/preview-api";
-import { ThemeProvider, TranslateProvider } from "@aplicacion";
+import { ThemeProvider, TranslateProvider } from "@libs";
 import { STORY_THEMES } from "../stories/fixtures";
 import { STORY_TRANSLATIONS } from "../stories/translations";
-import "../src/libs/styles/index.css";
+import "../projects/satoshi-ui/src/libs/styles/index.css";
 
 const { initializeThemeState } = DecoratorHelpers;
 

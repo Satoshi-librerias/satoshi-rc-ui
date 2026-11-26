@@ -200,22 +200,6 @@ export default defineConfig([
       ],
 
       /*
-       * Import restrictions.
-       */
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            {
-              group: ["@libs", "@libs/*"],
-              message:
-                "Use a specific alias: @domain, @aplicacion, @infraestructura, @components, @assets or @styles.",
-            },
-          ],
-        },
-      ],
-
-      /*
        * JSDoc requirements.
        */
       "jsdoc/require-jsdoc": [
@@ -292,7 +276,7 @@ export default defineConfig([
   },
 
   {
-    files: ["src/test/**/*.{ts,tsx}"],
+    files: ["projects/satoshi-ui/test/**/*.{ts,tsx}"],
 
     extends: [
       js.configs.recommended,
@@ -304,7 +288,7 @@ export default defineConfig([
       globals: { ...globals.browser, ...globals.node },
 
       parserOptions: {
-        project: "./tsconfig.app.json",
+        project: "./tsconfig.test.json",
         tsconfigRootDir: PROJECT_DIRECTORY,
       },
     },

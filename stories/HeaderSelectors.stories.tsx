@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { HeaderSelectors } from "@presentation";
+import { HeaderSelectors } from "@components";
 
 /**
  * @description Stories de la seccion de selectores del encabezado.
